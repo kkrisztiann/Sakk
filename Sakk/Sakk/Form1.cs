@@ -12,9 +12,79 @@ namespace Sakk
 {
     public partial class Form1 : Form
     {
+        static int tablameret = 8;
+        static Mezo[,] tabla = new Mezo[tablameret,tablameret];
+        static string[] hatsosor = new string[] { "bástya", "ló", "futó", "királynő", "király", "futó", "ló", "bástya"};
+
         public Form1()
         {
             InitializeComponent();
+            BabuLepesVisszaAdas("bástya" );
+            TablaGen();
+        }
+
+        private void TablaGen()
+        {
+            bool vilagosmezo = true;
+            for (int i = 0; i < tablameret; i++)
+            {
+                for (int j = 0; j < tablameret; j++)
+                {
+                    tabla[i, j] = new Mezo(new Point(i, j), new Babu("paraszt", "fehér"));
+                    if (vilagosmezo)
+                    {
+                        tabla[i, j].BackColor = Color.Tan;
+                    }
+                    else
+                    {
+                        tabla[i, j].BackColor = Color.Brown;
+                    }
+                    tabla[i, j].Size = new Size(80, 80);
+                    tabla[i, j].Location = new Point(50 + i * 80, 50 + j * 80);
+                    tabla[i, j].SizeMode=PictureBoxSizeMode.StretchImage;
+                    tabla[i, j].Koordinatak= new Point(i,j);
+                    tabla[i, j].MouseClick += new MouseEventHandler(Klikkeles);
+                    this.Controls.Add(tabla[i, j]);
+                    if (j!=7)
+                    {
+                        vilagosmezo = !vilagosmezo;
+                    }
+
+                }
+            }
+        }
+
+        private void Klikkeles(object sender, MouseEventArgs e)
+        {
+            Mezo klikkelt = sender as Mezo;
+        }
+
+        private void BabuLepesVisszaAdas(string babu)
+        {
+            switch (babu)
+            {
+                case "bástya":
+
+                    break;
+                case "ló":
+
+                    break;
+                case "futó":
+
+                    break;
+                case "királynő":
+
+                    break;
+                case "király":
+
+                    break;
+                case "paraszt":
+
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 }
