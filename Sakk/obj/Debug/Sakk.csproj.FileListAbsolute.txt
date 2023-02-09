@@ -1,0 +1,10 @@
+D:\chess\Sakk\bin\Debug\Sakk.exe.config
+D:\chess\Sakk\bin\Debug\Sakk.exe
+D:\chess\Sakk\bin\Debug\Sakk.pdb
+D:\chess\Sakk\obj\Debug\Sakk.csprojAssemblyReference.cache
+D:\chess\Sakk\obj\Debug\Sakk.Form1.resources
+D:\chess\Sakk\obj\Debug\Sakk.Properties.Resources.resources
+D:\chess\Sakk\obj\Debug\Sakk.csproj.GenerateResource.cache
+D:\chess\Sakk\obj\Debug\Sakk.csproj.CoreCompileInputs.cache
+D:\chess\Sakk\obj\Debug\Sakk.exe
+D:\chess\Sakk\obj\Debug\Sakk.pdb
