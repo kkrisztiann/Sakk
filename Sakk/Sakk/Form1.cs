@@ -30,7 +30,26 @@ namespace Sakk
             {
                 for (int j = 0; j < tablameret; j++)
                 {
-                    tabla[i, j] = new Mezo(new Point(i, j), new Babu("paraszt", "fehér"));
+                    if (i == 0)
+                    {
+                        tabla[i, j] = new Mezo(new Point(i, j), new Babu(hatsosor[j], "fekete"));
+                    }
+                    else if (i == 1)
+                    {
+                        tabla[i, j] = new Mezo(new Point(i, j), new Babu("paraszt", "fekete"));
+                    }
+                    else if (i == 7)
+                    {
+                        tabla[i, j] = new Mezo(new Point(i, j), new Babu(hatsosor[j], "fehér"));
+                    }
+                    else if (i == 6)
+                    {
+                        tabla[i, j] = new Mezo(new Point(i, j), new Babu("paraszt", "fehér"));
+                    }
+                    else
+                    {
+                        tabla[i, j] = new Mezo(new Point(i, j), new Babu("üres", "üres"));
+                    }
                     if (vilagosmezo)
                     {
                         tabla[i, j].BackColor = Color.Tan;

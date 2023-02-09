@@ -7,3 +7,4 @@ D:\Chess\Sakk\Sakk\obj\Debug\Sakk.csproj.GenerateResource.cache
 D:\Chess\Sakk\Sakk\obj\Debug\Sakk.csproj.CoreCompileInputs.cache
 D:\Chess\Sakk\Sakk\obj\Debug\Sakk.exe
 D:\Chess\Sakk\Sakk\obj\Debug\Sakk.pdb
+D:\Chess\Sakk\Sakk\obj\Debug\Sakk.Form1.resources
