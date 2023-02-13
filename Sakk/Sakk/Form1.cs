@@ -15,6 +15,7 @@ namespace Sakk
         static int tablameret = 8;
         static Mezo[,] tabla = new Mezo[tablameret,tablameret];
         static string[] hatsosor = new string[] { "bástya", "ló", "futó", "királynő", "király", "futó", "ló", "bástya"};
+        static string kijon = "fehér";
 
         public Form1()
         {
@@ -59,7 +60,7 @@ namespace Sakk
                         tabla[i, j].BackColor = Color.Brown;
                     }
                     tabla[i, j].Size = new Size(80, 80);
-                    tabla[i, j].Location = new Point(50 + i * 80, 50 + j * 80);
+                    tabla[i, j].Location = new Point(165 + i * 80, 130 + j * 80);
                     tabla[i, j].SizeMode=PictureBoxSizeMode.StretchImage;
                     tabla[i, j].Koordinatak= new Point(i,j);
                     tabla[i, j].MouseClick += new MouseEventHandler(Klikkeles);
@@ -68,7 +69,6 @@ namespace Sakk
                     {
                         vilagosmezo = !vilagosmezo;
                     }
-
                 }
             }
         }
@@ -76,6 +76,22 @@ namespace Sakk
         private void Klikkeles(object sender, MouseEventArgs e)
         {
             Mezo klikkelt = sender as Mezo;
+
+            if (klikkelt.Babu.Tipus == "üres") { return; };
+          
+            if (klikkelt.Babu.Szin == kijon) {
+
+
+                JatekosCsere();
+            };
+        }
+
+        private void JatekosCsere()
+        {
+            if (kijon == "fehér") { kijon = "fekete"; }
+            else { kijon = "fehér"; }
+
+            MessageBox.Show(kijon);
         }
 
         private void BabuLepesVisszaAdas(string babu)
