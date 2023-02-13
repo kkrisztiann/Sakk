@@ -13,43 +13,76 @@ namespace Sakk
         public Point Koordinatak;
         public string babu_tipus
         {
-            get
-            {
-                return seged_tipus;
-            }
+            get { return seged_tipus; }
             set
             {
                 seged_tipus = value;
                 Image = KepValasztas(Babu);
             }
         }
-        public Babu Babu { 
-            get
-            {
-                return seged_babu;
-            }
+        public Babu Babu {
+            get { return seged_babu; }
             set
             {
                 seged_babu = value;
                 Image = KepValasztas(Babu);
             }
         }
+        public bool Lepheto
+        {
+            get { return seged_lepheto; }
+            set
+            {
+                seged_lepheto = value;
+                BackgroundImage = BgcImageChooseLepheto(Lepheto);
+            }
+        }
+        public bool Kijelolt
+        {
+            get { return seged_kijelolt; }
+            set
+            {
+                seged_kijelolt = value;
+                BackgroundImage = BgcImageChooseKijelolt(Kijelolt);
+            }
+        }
 
+        private bool seged_kijelolt;
+        private bool seged_lepheto;
         private Babu seged_babu;
         private string seged_tipus;
 
 
-
+        //KONSTRUKTOR----------------------------------------------------------------------------
         public Mezo(Point koordinatak)
         {
-            Babu = null;    
+            Babu = null;
+            Lepheto = false;
+            Kijelolt = false;
             Koordinatak = koordinatak;
             babu_tipus = "cburnett";
 
             SizeMode = PictureBoxSizeMode.Zoom;
-            Size = new Size(80, 80);
+            BackgroundImageLayout = ImageLayout.Zoom;
+            Size = new Size(60, 60);
         }
 
+        private Image BgcImageChooseKijelolt(bool kijelolt)
+        {
+            return kijelolt ? Image.FromFile("piece/kijelolt.png") : null;
+        }
+
+        private Image BgcImageChooseLepheto(bool lepheto)
+        {
+            if (lepheto)
+            {
+                return Babu == null ? Image.FromFile("piece/kijeloltmezo.png") : Image.FromFile("piece/kijeloltbabu.png");
+            }
+            else
+            {
+                return null;
+            }
+        }
 
 
         private Image KepValasztas(Babu babu)

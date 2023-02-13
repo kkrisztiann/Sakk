@@ -51,6 +51,10 @@ namespace Sakk
                     }
                 }
             }
+
+            tabla[1, 0].Kijelolt = true;
+            tabla[6, 0].Lepheto = true;
+            tabla[4, 0].Lepheto = true;
         }
 
         private void Klikkeles(object sender, MouseEventArgs e)
