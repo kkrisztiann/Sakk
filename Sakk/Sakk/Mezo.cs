@@ -40,23 +40,29 @@ namespace Sakk
 
 
 
-        public Mezo(Point koordinatak, Babu babu)
+        public Mezo(Point koordinatak)
         {
+            Babu = null;    
             Koordinatak = koordinatak;
-            Babu = babu;
             babu_tipus = "cburnett";
+
             SizeMode = PictureBoxSizeMode.Zoom;
+            Size = new Size(80, 80);
         }
 
 
 
-        private Image KepValasztas(Babu seged_babu)
+        private Image KepValasztas(Babu babu)
         {
-            if (seged_babu.Szin == "fekete")
+            if (babu == null)
+            {
+                return null;
+            }
+            if (babu.Szin == "fekete")
             {
                 return BabuTipusValasztas("b");
             }
-            else if (seged_babu.Szin == "fehér")
+            else if (babu.Szin == "fehér")
             {
                 return BabuTipusValasztas("w");
             }
@@ -68,20 +74,20 @@ namespace Sakk
 
         private Image BabuTipusValasztas(string szin)
         {
-            switch (seged_babu.Tipus)
+            switch (Babu.Tipus)
             {
                 case "bástya":
-                    return Image.FromFile($"piece/{babu_tipus}/{szin}R.svg");
+                    return Image.FromFile($"piece/{babu_tipus}/{szin}R.png");
                 case "huszár":
-                    return Image.FromFile($"piece/{babu_tipus}/{szin}N.svg");
+                    return Image.FromFile($"piece/{babu_tipus}/{szin}N.png");
                 case "királynő":
-                    return Image.FromFile($"piece/{babu_tipus}/{szin}Q.svg");
+                    return Image.FromFile($"piece/{babu_tipus}/{szin}Q.png");
                 case "futó":
-                    return Image.FromFile($"piece/{babu_tipus}/{szin}B.svg");
+                    return Image.FromFile($"piece/{babu_tipus}/{szin}B.png");
                 case "paraszt":
-                    return Image.FromFile($"piece/{babu_tipus}/{szin}P.svg");
+                    return Image.FromFile($"piece/{babu_tipus}/{szin}P.png");
                 case "király":
-                    return Image.FromFile($"piece/{babu_tipus}/{szin}K.svg");
+                    return Image.FromFile($"piece/{babu_tipus}/{szin}K.png");
                 default:
                     return null;
             }

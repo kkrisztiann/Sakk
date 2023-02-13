@@ -14,60 +14,40 @@ namespace Sakk
     {
         static int tablameret = 8;
         static Mezo[,] tabla = new Mezo[tablameret,tablameret];
-        static string[] hatsosor = new string[] { "bástya", "ló", "futó", "királynő", "király", "futó", "ló", "bástya"};
+        static Point kezdoPont = new Point(50, 50);
+        static string[] hatsosor = new string[] { "bástya", "huszár", "futó", "királynő", "király", "futó", "huszár", "bástya"};
         static string kijon = "fehér";
 
         public Form1()
         {
             InitializeComponent();
-            BabuLepesVisszaAdas("bástya" );
             TablaGen();
         }
 
         private void TablaGen()
         {
-            bool vilagosmezo = true;
-            for (int i = 0; i < tablameret; i++)
+            bool vilagos = true;
+            for (int sor = 0; sor < tablameret; sor++)
             {
-                for (int j = 0; j < tablameret; j++)
+                for (int oszlop = 0; oszlop < tablameret; oszlop++)
                 {
-                    if (i == 0)
+                    tabla[sor, oszlop] = new Mezo(new Point(sor, oszlop));
+                    tabla[sor, oszlop].Location = new Point(kezdoPont.X + oszlop * tabla[sor, oszlop].Size.Width, kezdoPont.Y + sor * tabla[sor, oszlop].Size.Height);
+                    this.Controls.Add(tabla[sor, oszlop]);
+
+                    tabla[sor, oszlop].BackColor = vilagos ? Color.Tan : Color.Brown;
+                    if (oszlop != tablameret-1)
                     {
-                        tabla[i, j] = new Mezo(new Point(i, j), new Babu(hatsosor[j], "fekete"));
+                        vilagos = !vilagos;
                     }
-                    else if (i == 1)
+
+                    if (sor == 0 || sor == tablameret-1)
                     {
-                        tabla[i, j] = new Mezo(new Point(i, j), new Babu("paraszt", "fekete"));
+                        tabla[sor, oszlop].Babu = new Babu(hatsosor[oszlop] ,sor == 0 ? "fekete" : "fehér");
                     }
-                    else if (i == 7)
+                    if (sor == 1 || sor == tablameret-2)
                     {
-                        tabla[i, j] = new Mezo(new Point(i, j), new Babu(hatsosor[j], "fehér"));
-                    }
-                    else if (i == 6)
-                    {
-                        tabla[i, j] = new Mezo(new Point(i, j), new Babu("paraszt", "fehér"));
-                    }
-                    else
-                    {
-                        tabla[i, j] = new Mezo(new Point(i, j), new Babu("üres", "üres"));
-                    }
-                    if (vilagosmezo)
-                    {
-                        tabla[i, j].BackColor = Color.Tan;
-                    }
-                    else
-                    {
-                        tabla[i, j].BackColor = Color.Brown;
-                    }
-                    tabla[i, j].Size = new Size(80, 80);
-                    tabla[i, j].Location = new Point(165 + i * 80, 130 + j * 80);
-                    tabla[i, j].SizeMode=PictureBoxSizeMode.StretchImage;
-                    tabla[i, j].Koordinatak= new Point(i,j);
-                    tabla[i, j].MouseClick += new MouseEventHandler(Klikkeles);
-                    this.Controls.Add(tabla[i, j]);
-                    if (j!=7)
-                    {
-                        vilagosmezo = !vilagosmezo;
+                        tabla[sor, oszlop].Babu = new Babu("paraszt", sor == 1 ? "fekete" : "fehér");
                     }
                 }
             }
@@ -92,34 +72,6 @@ namespace Sakk
             else { kijon = "fehér"; }
 
             MessageBox.Show(kijon);
-        }
-
-        private void BabuLepesVisszaAdas(string babu)
-        {
-            switch (babu)
-            {
-                case "bástya":
-
-                    break;
-                case "ló":
-
-                    break;
-                case "futó":
-
-                    break;
-                case "királynő":
-
-                    break;
-                case "király":
-
-                    break;
-                case "paraszt":
-
-                    break;
-
-                default:
-                    break;
-            }
         }
     }
 }
