@@ -71,17 +71,17 @@ namespace Sakk
             switch (seged_babu.Tipus)
             {
                 case "bástya":
-                    return Image.FromFile($"piece/{babu_tipus}/{szin}R");
+                    return Image.FromFile($"piece/{babu_tipus}/{szin}R.svg");
                 case "huszár":
-                    return Image.FromFile($"piece/{babu_tipus}/{szin}N");
+                    return Image.FromFile($"piece/{babu_tipus}/{szin}N.svg");
                 case "királynő":
-                    return Image.FromFile($"piece/{babu_tipus}/{szin}Q");
+                    return Image.FromFile($"piece/{babu_tipus}/{szin}Q.svg");
                 case "futó":
-                    return Image.FromFile($"piece/{babu_tipus}/{szin}B");
+                    return Image.FromFile($"piece/{babu_tipus}/{szin}B.svg");
                 case "paraszt":
-                    return Image.FromFile($"piece/{babu_tipus}/{szin}P");
+                    return Image.FromFile($"piece/{babu_tipus}/{szin}P.svg");
                 case "király":
-                    return Image.FromFile($"piece/{babu_tipus}/{szin}K");
+                    return Image.FromFile($"piece/{babu_tipus}/{szin}K.svg");
                 default:
                     return null;
             }
