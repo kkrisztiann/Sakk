@@ -10,6 +10,7 @@ namespace Sakk
 {
     public partial class Mezo: PictureBox
     {
+        private int tablameret = 8;
         public Point Koordinatak;
         public string babu_tipus
         {
@@ -124,6 +125,129 @@ namespace Sakk
                 default:
                     return null;
             }
+        }
+
+        public List<List<Point>> LepesLehetosegek()
+        {
+            if (Babu != null)
+            {
+                switch (Babu.Tipus)
+                {
+                    case "bástya":
+                        return Bastya();
+                    case "huszár":
+                        return Huszar();
+                    case "királynő":
+                        return Kiralyno();
+                    case "futó":
+                        return Futo();
+                    case "paraszt":
+                        return Paraszt();
+                    case "király":
+                        return Kiraly();
+                    default:
+                        return null;
+                }
+            }
+            else
+            {
+                return new List<List<Point>>() { new List<Point>() };
+            }
+        }
+
+        private List<List<Point>> Kiraly()
+        {
+            List<List<Point>> lista = new List<List<Point>>();
+
+            for (int i = -1; i <= 1; i+=2)
+            {
+                for (int j = -1; j <= 1; j+=2)
+                {
+                    lista.Add(new List<Point>() { new Point(Koordinatak.X + i, Koordinatak.Y + j) });
+                }
+                List<Point> irany1 = new List<Point>();
+                List<Point> irany2 = new List<Point>();
+                for (int sor_oszlop = 1; sor_oszlop < 2; sor_oszlop++)
+                {
+                    irany1.Add(new Point(Koordinatak.X + i * sor_oszlop, Koordinatak.Y));
+                    irany2.Add(new Point(Koordinatak.X, Koordinatak.Y + i * sor_oszlop));
+                }
+                lista.Add(irany1);
+                lista.Add(irany2);
+            }
+
+            return lista;
+        }
+
+        private List<List<Point>> Paraszt()
+        {
+            List<List<Point>> lista = new List<List<Point>>();
+
+            int irany = Babu.Szin == "fekete" ? 1 : -1;
+            for (int i = -1; i <= 1; i++)
+            {
+                lista.Add(new List<Point>() { new Point(Koordinatak.X + i, Koordinatak.Y + irany) });
+            }
+            return lista;
+        }
+
+        private List<List<Point>> Futo()
+        {
+            List<List<Point>> lista = new List<List<Point>>();
+
+            for (int i = -1; i <= 1; i+=2)
+            {
+                for (int j = -1; j <= 1; j+=2)
+                {
+                    List<Point> irany = new List<Point>();
+                    for (int k = 1; k < tablameret; k++)
+                    {
+                        irany.Add(new Point(Koordinatak.X + i * k, Koordinatak.Y + j * k));
+                    }
+                    lista.Add(irany);
+                }
+            }
+            return lista;
+        }
+
+        private List<List<Point>> Kiralyno()
+        {
+            return Bastya().Concat(Futo()).ToList();
+        }
+
+        private List<List<Point>> Huszar()
+        {
+            List<List<Point>> lista = new List<List<Point>>();
+
+            foreach (List<int> item in new List<List<int>>() { new List<int>() { 2, 1}, new List<int>() { 1, 2 } })
+            {
+                for (int i = -1; i <= 1; i+=2)
+                {
+                    for (int j = -1; j <= 1; j+=2)
+                    {
+                        lista.Add(new List<Point>() { new Point(Koordinatak.X + i * item[0], Koordinatak.Y + j * item[1]) });
+                    }
+                }
+            }
+            return lista;
+        }
+
+        private List<List<Point>> Bastya()
+        {
+            List<List<Point>> lista = new List<List<Point>>();
+            for (int i = -1; i <= 1; i+=2)
+            {
+                List<Point> irany1 = new List<Point>();
+                List<Point> irany2 = new List<Point>();
+                for (int sor_oszlop = 1; sor_oszlop < tablameret; sor_oszlop++)
+                {
+                    irany1.Add(new Point(Koordinatak.X + i*sor_oszlop, Koordinatak.Y));
+                    irany2.Add(new Point(Koordinatak.X, Koordinatak.Y + i * sor_oszlop));
+                }
+                lista.Add(irany1);
+                lista.Add(irany2);
+            }
+            return lista;
         }
     }
 }
