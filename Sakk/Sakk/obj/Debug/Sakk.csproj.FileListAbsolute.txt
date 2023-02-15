@@ -28,3 +28,13 @@ D:\xampp\htdocs\2-14 SZFT 2022-2023\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.Generat
 D:\xampp\htdocs\2-14 SZFT 2022-2023\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.CoreCompileInputs.cache
 D:\xampp\htdocs\2-14 SZFT 2022-2023\Sakk\Sakk\Sakk\obj\Debug\Sakk.exe
 D:\xampp\htdocs\2-14 SZFT 2022-2023\Sakk\Sakk\Sakk\obj\Debug\Sakk.pdb
+D:\Sakkocska\Sakk\Sakk\Sakk\bin\Debug\Sakk.exe.config
+D:\Sakkocska\Sakk\Sakk\Sakk\bin\Debug\Sakk.exe
+D:\Sakkocska\Sakk\Sakk\Sakk\bin\Debug\Sakk.pdb
+D:\Sakkocska\Sakk\Sakk\Sakk\obj\Debug\Sakk.csprojAssemblyReference.cache
+D:\Sakkocska\Sakk\Sakk\Sakk\obj\Debug\Sakk.Form1.resources
+D:\Sakkocska\Sakk\Sakk\Sakk\obj\Debug\Sakk.Properties.Resources.resources
+D:\Sakkocska\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.GenerateResource.cache
+D:\Sakkocska\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.CoreCompileInputs.cache
+D:\Sakkocska\Sakk\Sakk\Sakk\obj\Debug\Sakk.exe
+D:\Sakkocska\Sakk\Sakk\Sakk\obj\Debug\Sakk.pdb

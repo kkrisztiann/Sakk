@@ -60,11 +60,11 @@ namespace Sakk
             Lepheto = false;
             Kijelolt = false;
             Koordinatak = koordinatak;
-            babu_tipus = "cburnett";
+            babu_tipus = "horsey";
 
             SizeMode = PictureBoxSizeMode.Zoom;
             BackgroundImageLayout = ImageLayout.Zoom;
-            Size = new Size(60, 60);
+            Size = new Size(90, 90);
         }
 
         private Image BgcImageChooseKijelolt(bool kijelolt)
