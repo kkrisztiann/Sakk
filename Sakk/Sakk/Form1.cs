@@ -20,6 +20,7 @@ namespace Sakk
         static string aktszerkesztesszin = "w";
         static string aktszerkesztesbabu = "";
         static bool szerekesztomod = false;
+        static Mezo kijelolt = null;
 
         public Form1()
         {
@@ -57,9 +58,6 @@ namespace Sakk
                 }
             }
 
-            tabla[1, 0].Kijelolt = true;
-            tabla[6, 0].Lepheto = true;
-            tabla[4, 0].Lepheto = true;
         }
 
         private void Klikkeles(object sender, MouseEventArgs e)
@@ -67,19 +65,39 @@ namespace Sakk
             Mezo klikkelt = sender as Mezo;
             if (szerekesztomod)
             {
-                if (e.Button==MouseButtons.Right)
+                Szerkesztes(klikkelt, e);
+                return;
+            }
+            //van kijelölt
+            if (kijelolt!=null)
+            {
+                //lepheto mezore kattintott?
+                if (klikkelt.Lepheto)
                 {
-                    tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Babu = null;
-                    tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Lepheto = false;
-                    tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Kijelolt = false;
+                    //megtörténik a lépés/ütés
+                    //kijelölések törlése
                 }
-                else if (e.Button == MouseButtons.Left || aktszerkesztesbabu!="")
+                else
                 {
-                    tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Babu = new Babu(aktszerkesztesbabu, aktszerkesztesszin == "w" ? "fehér" : "fekete");
-                    tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Lepheto = false;
-                    tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Kijelolt = false;
+                    //kijelölések törlése
+                    KijelolesekTorlese();
                 }
-            }          
+            }
+            else
+            {
+                //bábura klikk
+                if (klikkelt.Babu != null)
+                {
+                    //saját bábura klikk
+                    if (klikkelt.Babu.Szin==kijon)
+                    {
+                        kijelolt = klikkelt;
+                        kijelolt.Kijelolt = true;
+                        LephetoMezokKijelolese(klikkelt);
+                    }
+                }
+            }
+            
             //if (klikkelt.Babu.Tipus == "üres") { return; };
             /*if (klikkelt.Babu.Szin == kijon) {
 
@@ -88,12 +106,125 @@ namespace Sakk
             };*/
         }
 
+        private void KijelolesekTorlese()
+        {
+            for (int i = 0; i < tablameret; i++)
+            {
+                for (int j = 0; j < tablameret; j++)
+                {
+                    tabla[i, j].Kijelolt = false;
+                    tabla[i, j].Lepheto = false;
+                }
+            }
+            kijelolt = null;
+        }
+
+        private void LephetoMezokKijelolese(Mezo klikkelt)
+        {
+            List<List<Point>> lista = klikkelt.LepesLehetosegek();
+            for (int i = 0; i < lista.Count; i++)
+            {
+                for (int j = 0; j < lista[i].Count; j++)
+                {
+                    if (tabla[lista[i][j].X, lista[i][j].Y].Babu==null)
+                    {
+                        if (!Sakkellenorzes(klikkelt, i, j) /*sakkelenörzés oda lépés esetén*/)
+                        {
+                            tabla[lista[i][j].X, lista[i][j].Y].Lepheto = true;
+                        }
+                    }
+                    //vanrajtababu
+                    else
+                    {
+                        //saját bábu-e
+                        if (tabla[lista[i][j].X, lista[i][j].Y].Babu.Szin==kijon)
+                        {
+                            break;
+                        }
+                        //nem saját
+                        else
+                        {
+                            tabla[lista[i][j].X, lista[i][j].Y].Lepheto = true;
+                            break;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        private bool Sakkellenorzes(Mezo klikkelt, int i, int j)
+        {
+            Mezo[,] segedtabla = new Mezo[tablameret, tablameret];
+            TablaMasolo(segedtabla);
+            //segedtablan majd megnezzuk hogy lenne e sakk
+            segedtabla[i, j].Babu = klikkelt.Babu;
+            segedtabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Babu = null;
+            for (int k = 0; k < tablameret; k++)
+            {
+                for (int l = 0; l < tablameret; l++)
+                {
+                    if (segedtabla[k, l].Babu != null && segedtabla[k,l].Babu.Szin != kijon)
+                    {
+                        List<List<Point>> lista = segedtabla[k, l].LepesLehetosegek();
+                        for (int m = 0; m < lista.Count; m++)
+                        {
+                            for (int n = 0; n < lista[m].Count; n++)
+                            {
+                                if (segedtabla[lista[m][n].X, lista[m][n].Y].Babu != null)
+                                {
+                                    if (segedtabla[lista[m][n].X, lista[m][n].Y].Babu.Tipus == "király" && segedtabla[lista[m][n].X, lista[m][n].Y].Babu.Szin == kijon)
+                                    {
+                                        return true;
+                                    }
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        private void TablaMasolo(Mezo[,] segedtabla)
+        {
+            for (int i = 0; i < tablameret; i++)
+            {
+                for (int j = 0; j < tablameret; j++)
+                {
+                    segedtabla[i, j] = new Mezo(new Point(i, j));
+                    segedtabla[i, j].Babu = tabla[i, j].Babu;
+                }
+            }
+        }
+
+        private void Szerkesztes(Mezo klikkelt, MouseEventArgs e)
+        {
+            KijelolesekTorlese();
+            if (e.Button == MouseButtons.Right)
+            {
+                tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Babu = null;
+                tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Lepheto = false;
+                tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Kijelolt = false;
+            }
+            else if (e.Button == MouseButtons.Left && aktszerkesztesbabu != "")
+            {
+                tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Babu = new Babu(aktszerkesztesbabu, aktszerkesztesszin == "w" ? "fehér" : "fekete");
+                tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Lepheto = false;
+                tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Kijelolt = false;
+            }
+        }
+
         private void JatekosCsere()
         {
             if (kijon == "fehér") { kijon = "fekete"; }
             else { kijon = "fehér"; }
 
-            MessageBox.Show(kijon);
+            //MessageBox.Show(kijon);
         }
 
         private void feketeBtn_Click(object sender, EventArgs e)

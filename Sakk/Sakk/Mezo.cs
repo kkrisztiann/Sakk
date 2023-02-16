@@ -134,17 +134,17 @@ namespace Sakk
                 switch (Babu.Tipus)
                 {
                     case "bástya":
-                        return Bastya();
+                        return IndexCheck(Bastya());
                     case "huszár":
-                        return Huszar();
+                        return IndexCheck(Huszar());
                     case "királynő":
-                        return Kiralyno();
+                        return IndexCheck(Kiralyno());
                     case "futó":
-                        return Futo();
+                        return IndexCheck(Futo());
                     case "paraszt":
-                        return Paraszt();
+                        return IndexCheck(Paraszt());
                     case "király":
-                        return Kiraly();
+                        return IndexCheck(Kiraly());
                     default:
                         return null;
                 }
@@ -153,6 +153,22 @@ namespace Sakk
             {
                 return new List<List<Point>>() { new List<Point>() };
             }
+        }
+
+        private List<List<Point>> IndexCheck(List<List<Point>> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                for (int j = 0; j < list[i].Count; j++)
+                {
+                    if (list[i][j].X > tablameret-1 || list[i][j].X < 0 || list[i][j].Y > tablameret - 1 || list[i][j].Y < 0)
+                    {
+                        list[i].RemoveAt(j);
+                        j--;
+                    }
+                }
+            }
+            return list;
         }
 
         private List<List<Point>> Kiraly()
@@ -186,7 +202,7 @@ namespace Sakk
             int irany = Babu.Szin == "fekete" ? 1 : -1;
             for (int i = -1; i <= 1; i++)
             {
-                lista.Add(new List<Point>() { new Point(Koordinatak.X + i, Koordinatak.Y + irany) });
+                lista.Add(new List<Point>() { new Point(Koordinatak.X + irany, Koordinatak.Y + i) });
             }
             return lista;
         }
