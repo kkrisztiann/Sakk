@@ -128,7 +128,7 @@ namespace Sakk
                 {
                     if (tabla[lista[i][j].X, lista[i][j].Y].Babu==null)
                     {
-                        if (!Sakkellenorzes(klikkelt, i, j) /*sakkelenörzés oda lépés esetén*/)
+                        if (Sakkellenorzes(klikkelt, lista[i][j].X, lista[i][j].Y) /*sakkellenörzés oda lépés esetén*/)
                         {
                             tabla[lista[i][j].X, lista[i][j].Y].Lepheto = true;
                         }
@@ -155,10 +155,9 @@ namespace Sakk
 
         private bool Sakkellenorzes(Mezo klikkelt, int i, int j)
         {
-            Mezo[,] segedtabla = new Mezo[tablameret, tablameret];
-            TablaMasolo(segedtabla);
+            Mezo[,] segedtabla = TablaMasolo();
             //segedtablan majd megnezzuk hogy lenne e sakk
-            segedtabla[i, j].Babu = klikkelt.Babu;
+            segedtabla[i, j].Babu = new Babu(klikkelt.Babu.Tipus, klikkelt.Babu.Szin);
             segedtabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Babu = null;
             for (int k = 0; k < tablameret; k++)
             {
@@ -175,23 +174,25 @@ namespace Sakk
                                 {
                                     if (segedtabla[lista[m][n].X, lista[m][n].Y].Babu.Tipus == "király" && segedtabla[lista[m][n].X, lista[m][n].Y].Babu.Szin == kijon)
                                     {
-                                        return true;
+                                        return false;
                                     }
-                                }
-                                else
-                                {
-                                    break;
+                                    else
+                                    {
+                                        break;
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-            return false;
+            return true;
         }
 
-        private void TablaMasolo(Mezo[,] segedtabla)
+        private Mezo[,] TablaMasolo()
         {
+            Mezo[,] segedtabla = new Mezo[tablameret, tablameret];
+
             for (int i = 0; i < tablameret; i++)
             {
                 for (int j = 0; j < tablameret; j++)
@@ -200,6 +201,7 @@ namespace Sakk
                     segedtabla[i, j].Babu = tabla[i, j].Babu;
                 }
             }
+            return segedtabla;
         }
 
         private void Szerkesztes(Mezo klikkelt, MouseEventArgs e)

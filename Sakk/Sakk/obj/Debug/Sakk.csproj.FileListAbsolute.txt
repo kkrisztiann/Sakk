@@ -38,3 +38,13 @@ D:\Sakkocska\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.GenerateResource.cache
 D:\Sakkocska\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.CoreCompileInputs.cache
 D:\Sakkocska\Sakk\Sakk\Sakk\obj\Debug\Sakk.exe
 D:\Sakkocska\Sakk\Sakk\Sakk\obj\Debug\Sakk.pdb
+D:\xampp\htdocs\2-14 SZFT 2022-2023\Projektek\Sakk\Sakk\Sakk\bin\Debug\Sakk.exe.config
+D:\xampp\htdocs\2-14 SZFT 2022-2023\Projektek\Sakk\Sakk\Sakk\bin\Debug\Sakk.exe
+D:\xampp\htdocs\2-14 SZFT 2022-2023\Projektek\Sakk\Sakk\Sakk\bin\Debug\Sakk.pdb
+D:\xampp\htdocs\2-14 SZFT 2022-2023\Projektek\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.AssemblyReference.cache
+D:\xampp\htdocs\2-14 SZFT 2022-2023\Projektek\Sakk\Sakk\Sakk\obj\Debug\Sakk.Form1.resources
+D:\xampp\htdocs\2-14 SZFT 2022-2023\Projektek\Sakk\Sakk\Sakk\obj\Debug\Sakk.Properties.Resources.resources
+D:\xampp\htdocs\2-14 SZFT 2022-2023\Projektek\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.GenerateResource.cache
+D:\xampp\htdocs\2-14 SZFT 2022-2023\Projektek\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.CoreCompileInputs.cache
+D:\xampp\htdocs\2-14 SZFT 2022-2023\Projektek\Sakk\Sakk\Sakk\obj\Debug\Sakk.exe
+D:\xampp\htdocs\2-14 SZFT 2022-2023\Projektek\Sakk\Sakk\Sakk\obj\Debug\Sakk.pdb
