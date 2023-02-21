@@ -38,6 +38,8 @@ namespace Sakk
             this.parasztPBox = new System.Windows.Forms.PictureBox();
             this.feketeBtn = new System.Windows.Forms.Button();
             this.feherBtn = new System.Windows.Forms.Button();
+            this.TablaTorolBtn = new System.Windows.Forms.Button();
+            this.TablaFeltoltBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KiralyPBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kiralynoPBox)).BeginInit();
@@ -49,6 +51,8 @@ namespace Sakk
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.TablaFeltoltBtn);
+            this.groupBox1.Controls.Add(this.TablaTorolBtn);
             this.groupBox1.Controls.Add(this.KiralyPBox);
             this.groupBox1.Controls.Add(this.kiralynoPBox);
             this.groupBox1.Controls.Add(this.bastyaPBox);
@@ -57,9 +61,9 @@ namespace Sakk
             this.groupBox1.Controls.Add(this.parasztPBox);
             this.groupBox1.Controls.Add(this.feketeBtn);
             this.groupBox1.Controls.Add(this.feherBtn);
-            this.groupBox1.Location = new System.Drawing.Point(772, 93);
+            this.groupBox1.Location = new System.Drawing.Point(847, 39);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 220);
+            this.groupBox1.Size = new System.Drawing.Size(200, 283);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Szerkesztő mód";
@@ -153,11 +157,33 @@ namespace Sakk
             this.feherBtn.UseVisualStyleBackColor = false;
             this.feherBtn.Click += new System.EventHandler(this.feherBtn_Click);
             // 
+            // TablaTorolBtn
+            // 
+            this.TablaTorolBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.TablaTorolBtn.Location = new System.Drawing.Point(6, 231);
+            this.TablaTorolBtn.Name = "TablaTorolBtn";
+            this.TablaTorolBtn.Size = new System.Drawing.Size(77, 46);
+            this.TablaTorolBtn.TabIndex = 8;
+            this.TablaTorolBtn.Text = "Tábla törlés";
+            this.TablaTorolBtn.UseVisualStyleBackColor = true;
+            this.TablaTorolBtn.Click += new System.EventHandler(this.TablaTorolBtn_Click);
+            // 
+            // TablaFeltoltBtn
+            // 
+            this.TablaFeltoltBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.TablaFeltoltBtn.Location = new System.Drawing.Point(88, 231);
+            this.TablaFeltoltBtn.Name = "TablaFeltoltBtn";
+            this.TablaFeltoltBtn.Size = new System.Drawing.Size(106, 46);
+            this.TablaFeltoltBtn.TabIndex = 9;
+            this.TablaFeltoltBtn.Text = "Tábla feltöltése";
+            this.TablaFeltoltBtn.UseVisualStyleBackColor = true;
+            this.TablaFeltoltBtn.Click += new System.EventHandler(this.TablaFeltoltBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 881);
+            this.ClientSize = new System.Drawing.Size(817, 881);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
@@ -186,6 +212,8 @@ namespace Sakk
         private System.Windows.Forms.PictureBox bastyaPBox;
         private System.Windows.Forms.PictureBox loPBox;
         private System.Windows.Forms.PictureBox futoPBox;
+        private System.Windows.Forms.Button TablaTorolBtn;
+        private System.Windows.Forms.Button TablaFeltoltBtn;
     }
 }
 

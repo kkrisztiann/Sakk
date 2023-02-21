@@ -21,6 +21,7 @@ namespace Sakk
         static string aktszerkesztesbabu = "";
         static bool szerekesztomod = false;
         static Mezo kijelolt = null;
+        static string babu_tipus = "cburnett";
 
         public Form1()
         {
@@ -261,12 +262,12 @@ namespace Sakk
 
         private void SzerkesztoMod()
         {
-            parasztPBox.Image = Image.FromFile($"piece/horsey/{aktszerkesztesszin}P.png");
-            futoPBox.Image = Image.FromFile($"piece/horsey/{aktszerkesztesszin}B.png");
-            loPBox.Image = Image.FromFile($"piece/horsey/{aktszerkesztesszin}N.png");
-            bastyaPBox.Image = Image.FromFile($"piece/horsey/{aktszerkesztesszin}R.png");
-            kiralynoPBox.Image = Image.FromFile($"piece/horsey/{aktszerkesztesszin}Q.png");
-            KiralyPBox.Image = Image.FromFile($"piece/horsey/{aktszerkesztesszin}K.png");
+            parasztPBox.Image = Image.FromFile($"piece/{babu_tipus}/{aktszerkesztesszin}P.png");
+            futoPBox.Image = Image.FromFile($"piece/{babu_tipus}/{aktszerkesztesszin}B.png");
+            loPBox.Image = Image.FromFile($"piece/{babu_tipus}/{aktszerkesztesszin}N.png");
+            bastyaPBox.Image = Image.FromFile($"piece/{babu_tipus}/{aktszerkesztesszin}R.png");
+            kiralynoPBox.Image = Image.FromFile($"piece/{babu_tipus}/{aktszerkesztesszin}Q.png");
+            KiralyPBox.Image = Image.FromFile($"piece/{babu_tipus}/{aktszerkesztesszin}K.png");
         }
 
         private void parasztPBox_Click(object sender, EventArgs e)
@@ -317,6 +318,44 @@ namespace Sakk
             {
                 groupBox1.Visible = !groupBox1.Visible;
                 szerekesztomod = !szerekesztomod;
+                
+                if (this.Size.Width==1075) this.Size = new Size(833, this.Height);
+                else this.Size = new Size(1075, this.Height);
+            }
+        }
+
+        private void TablaTorolBtn_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < tabla.GetLength(0); i++)
+            {
+                for (int j = 0; j < tabla.GetLength(1); j++)
+                {
+                    tabla[i, j].Babu = null;
+                }
+            }
+            TablaTorolBtn.Enabled = false;
+            TablaTorolBtn.Enabled = true;
+            this.Focus();
+        }
+
+        private void TablaFeltoltBtn_Click(object sender, EventArgs e)
+        {
+            TablaFeltoltBtn.Enabled = false;
+            TablaFeltoltBtn.Enabled = true;
+            this.Focus();
+            for (int i = 0; i < tabla.GetLength(0); i++)
+            {
+                for (int j = 0; j < tabla.GetLength(1); j++)
+                {
+                    if (i == 0 || i == tablameret - 1)
+                    {
+                        tabla[i, j].Babu = new Babu(hatsosor[j], i == 0 ? "fekete" : "fehér");
+                    }
+                    if (i == 1 || i == tablameret - 2)
+                    {
+                        tabla[i, j].Babu = new Babu("paraszt", i == 1 ? "fekete" : "fehér");
+                    }
+                }
             }
         }
     }
