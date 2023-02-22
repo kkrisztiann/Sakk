@@ -202,7 +202,13 @@ namespace Sakk
             int irany = Babu.Szin == "fekete" ? 1 : -1;
             for (int i = -1; i <= 1; i++)
             {
-                lista.Add(new List<Point>() { new Point(Koordinatak.X + irany, Koordinatak.Y + i) });
+                List<Point> belso = new List<Point>();
+                if (i == 0 && !Babu.Lepettemar)
+                {
+                    belso.Add(new Point(Koordinatak.X + 2*irany, Koordinatak.Y + i));
+                }
+                belso.Add(new Point(Koordinatak.X + irany, Koordinatak.Y + i));
+                lista.Add(belso);
             }
             return lista;
         }

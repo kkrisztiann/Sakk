@@ -22,6 +22,8 @@ namespace Sakk
         static bool szerekesztomod = false;
         static Mezo kijelolt = null;
         static string babu_tipus = "cburnett";
+        static bool matt = false;
+        static int masikszamlalo = 0;
 
         public Form1()
         {
@@ -47,18 +49,23 @@ namespace Sakk
                         vilagos = !vilagos;
                     }
 
-                    if (sor == 0 || sor == tablameret-1)
-                    {
-                        tabla[sor, oszlop].Babu = new Babu(hatsosor[oszlop] ,sor == 0 ? "fekete" : "fehér");
-                    }
-                    if (sor == 1 || sor == tablameret-2)
-                    {
-                        tabla[sor, oszlop].Babu = new Babu("paraszt", sor == 1 ? "fekete" : "fehér");
-                    }
+                    BabuGen(sor, oszlop);
                     tabla[sor, oszlop].MouseClick += new MouseEventHandler(Klikkeles);
                 }
             }
 
+        }
+
+        private void BabuGen(int sor, int oszlop)
+        {
+            if (sor == 0 || sor == tablameret - 1)
+            {
+                tabla[sor, oszlop].Babu = new Babu(hatsosor[oszlop], sor == 0 ? "fekete" : "fehér");
+            }
+            if (sor == 1 || sor == tablameret - 2)
+            {
+                tabla[sor, oszlop].Babu = new Babu("paraszt", sor == 1 ? "fekete" : "fehér");
+            }
         }
 
         private void Klikkeles(object sender, MouseEventArgs e)
@@ -76,7 +83,13 @@ namespace Sakk
                 if (klikkelt.Lepheto)
                 {
                     //megtörténik a lépés/ütés
+                    LepesPerUtes(klikkelt);
                     //kijelölések törlése
+                    KijelolesekTorlese();
+                    PromocioEllenorzes(klikkelt);
+                    JatekosCsere();
+                    MattEllenorzes();
+
                 }
                 else
                 {
@@ -94,7 +107,7 @@ namespace Sakk
                     {
                         kijelolt = klikkelt;
                         kijelolt.Kijelolt = true;
-                        LephetoMezokKijelolese(klikkelt);
+                        LephetoMezokKijelolese(klikkelt, false);
                     }
                 }
             }
@@ -105,6 +118,62 @@ namespace Sakk
 
                 JatekosCsere();
             };*/
+        }
+
+        private void MattEllenorzes()
+        {
+            masikszamlalo = 0;
+            for (int i = 0; i < tablameret; i++)
+            {
+                for (int j = 0; j < tablameret; j++)
+                {
+                    if (tabla[i, j].Babu != null && tabla[i, j].Babu.Szin == kijon)
+                    {
+                        masikszamlalo++;
+
+                    }
+                }
+            }
+            for (int i = 0; i < tablameret; i++)
+            {
+                for (int j = 0; j < tablameret; j++)
+                {
+                    if (tabla[i,j].Babu != null && tabla[i, j].Babu.Szin == kijon)
+                    {
+                        LephetoMezokKijelolese(tabla[i, j], true);
+
+                    }
+                }
+            }
+            if (masikszamlalo==0)
+            {
+                MessageBox.Show("matt bébi");
+            }
+            
+        }
+
+        private void PromocioEllenorzes(Mezo klikkelt)
+        {
+            if (klikkelt.Babu.Tipus=="paraszt")
+            {
+                if (klikkelt.Babu.Szin=="fehér" && klikkelt.Koordinatak.Y==0)
+                {
+
+                }
+                else if (klikkelt.Babu.Szin == "fehér" && klikkelt.Koordinatak.Y == tablameret-1)
+                {
+
+                }
+            }
+        }
+
+        private void LepesPerUtes(Mezo klikkelt)
+        {
+            //klikkelt egyenlo lesz a kijeloltel
+            kijelolt.Babu.Lepettemar = true;
+            klikkelt.Babu = kijelolt.Babu;
+            // sáncnál ez nem fog működni
+            kijelolt.Babu = null;
         }
 
         private void KijelolesekTorlese()
@@ -120,7 +189,7 @@ namespace Sakk
             kijelolt = null;
         }
 
-        private void LephetoMezokKijelolese(Mezo klikkelt)
+        private void LephetoMezokKijelolese(Mezo klikkelt, bool ellenorzes)
         {
             List<List<Point>> lista = klikkelt.LepesLehetosegek();
             for (int i = 0; i < lista.Count; i++)
@@ -129,9 +198,22 @@ namespace Sakk
                 {
                     if (tabla[lista[i][j].X, lista[i][j].Y].Babu==null)
                     {
-                        if (Sakkellenorzes(klikkelt, lista[i][j].X, lista[i][j].Y) /*sakkellenörzés oda lépés esetén*/)
+                        //meg nemtudom mit csinal
+                        //alitolag parasztot segiti
+                        if (!(klikkelt.Babu.Tipus == "paraszt" && i % 2 == 0))
                         {
-                            tabla[lista[i][j].X, lista[i][j].Y].Lepheto = true;
+                            if (Sakkellenorzes(klikkelt, lista[i][j].X, lista[i][j].Y) /*sakkellenörzés oda lépés esetén*/)
+                            {
+                                if (!ellenorzes)
+                                {
+                                    tabla[lista[i][j].X, lista[i][j].Y].Lepheto = true;
+                                }
+                                else
+                                {
+                                    matt = false;
+                                    return;
+                                }
+                            }
                         }
                     }
                     //vanrajtababu
@@ -145,12 +227,46 @@ namespace Sakk
                         //nem saját
                         else
                         {
-                            tabla[lista[i][j].X, lista[i][j].Y].Lepheto = true;
+                            if (klikkelt.Babu.Tipus == "paraszt" && i % 2 == 0)
+                            {
+                                if (Sakkellenorzes(klikkelt, lista[i][j].X, lista[i][j].Y) /*sakkellenörzés oda lépés esetén*/)
+                                {
+                                    if (!ellenorzes)
+                                    {
+                                        tabla[lista[i][j].X, lista[i][j].Y].Lepheto = true;
+                                    }
+                                    else
+                                    {
+                                        matt = false;
+                                        return;
+                                    }
+                                }
+                            }
+                            else if (klikkelt.Babu.Tipus != "paraszt")
+                            {
+                                if (Sakkellenorzes(klikkelt, lista[i][j].X, lista[i][j].Y) /*sakkellenörzés oda lépés esetén*/)
+                                {
+                                    if (!ellenorzes)
+                                    {
+                                        tabla[lista[i][j].X, lista[i][j].Y].Lepheto = true;
+                                    }
+                                    else
+                                    {
+                                        matt = false;
+                                        return;
+                                    }
+                                }
+                            }
+
                             break;
                         }
                     }
 
                 }
+            }
+            if (ellenorzes)
+            {
+                masikszamlalo--;
             }
         }
 
@@ -224,8 +340,7 @@ namespace Sakk
 
         private void JatekosCsere()
         {
-            if (kijon == "fehér") { kijon = "fekete"; }
-            else { kijon = "fehér"; }
+            kijon = new List<string>() { "fekete", "fehér" }.Find(x => x != kijon);
 
             //MessageBox.Show(kijon);
         }
@@ -335,11 +450,11 @@ namespace Sakk
             }
             TablaTorolBtn.Enabled = false;
             TablaTorolBtn.Enabled = true;
-            this.Focus();
         }
 
         private void TablaFeltoltBtn_Click(object sender, EventArgs e)
         {
+            TablaTorolBtn_Click(sender,e);
             TablaFeltoltBtn.Enabled = false;
             TablaFeltoltBtn.Enabled = true;
             this.Focus();
@@ -347,14 +462,7 @@ namespace Sakk
             {
                 for (int j = 0; j < tabla.GetLength(1); j++)
                 {
-                    if (i == 0 || i == tablameret - 1)
-                    {
-                        tabla[i, j].Babu = new Babu(hatsosor[j], i == 0 ? "fekete" : "fehér");
-                    }
-                    if (i == 1 || i == tablameret - 2)
-                    {
-                        tabla[i, j].Babu = new Babu("paraszt", i == 1 ? "fekete" : "fehér");
-                    }
+                    BabuGen(i, j);
                 }
             }
         }
