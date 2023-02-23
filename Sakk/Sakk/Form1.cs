@@ -30,6 +30,24 @@ namespace Sakk
             InitializeComponent();
             TablaGen();
             SzerkesztoMod();
+            TipusValaszto();
+        }
+
+        private void TipusValaszto()
+        {
+            List<string> tipusok = System.IO.Directory.GetDirectories(Environment.CurrentDirectory + "/piece").ToList();
+            for (int i = 0; i < tipusok.Count; i++)
+            {
+                int gap = (TipusPanel.Size.Width- 23 - (50 * 3)) / 3;
+                PictureBox Pbox = new PictureBox
+                {
+                    SizeMode = PictureBoxSizeMode.Zoom,
+                    Size = new Size(50, 50),
+                    Location = new Point(gap + ((i%3))*(gap + 50), (i / 3) * (gap + 50)),
+                    BackColor = Color.Black
+                };
+                TipusPanel.Controls.Add(Pbox);
+            }
         }
 
         private void TablaGen()
