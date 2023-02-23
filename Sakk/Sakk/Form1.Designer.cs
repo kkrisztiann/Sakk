@@ -29,7 +29,10 @@ namespace Sakk
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.TablaFeltoltPBox = new System.Windows.Forms.PictureBox();
+            this.TablaTorolPBox = new System.Windows.Forms.PictureBox();
             this.KiralyPBox = new System.Windows.Forms.PictureBox();
             this.kiralynoPBox = new System.Windows.Forms.PictureBox();
             this.bastyaPBox = new System.Windows.Forms.PictureBox();
@@ -38,9 +41,9 @@ namespace Sakk
             this.parasztPBox = new System.Windows.Forms.PictureBox();
             this.feketeBtn = new System.Windows.Forms.Button();
             this.feherBtn = new System.Windows.Forms.Button();
-            this.TablaTorolBtn = new System.Windows.Forms.Button();
-            this.TablaFeltoltBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TablaFeltoltPBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TablaTorolPBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.KiralyPBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kiralynoPBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bastyaPBox)).BeginInit();
@@ -51,8 +54,8 @@ namespace Sakk
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.TablaFeltoltBtn);
-            this.groupBox1.Controls.Add(this.TablaTorolBtn);
+            this.groupBox1.Controls.Add(this.TablaFeltoltPBox);
+            this.groupBox1.Controls.Add(this.TablaTorolPBox);
             this.groupBox1.Controls.Add(this.KiralyPBox);
             this.groupBox1.Controls.Add(this.kiralynoPBox);
             this.groupBox1.Controls.Add(this.bastyaPBox);
@@ -63,11 +66,35 @@ namespace Sakk
             this.groupBox1.Controls.Add(this.feherBtn);
             this.groupBox1.Location = new System.Drawing.Point(847, 39);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 283);
+            this.groupBox1.Size = new System.Drawing.Size(200, 309);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Szerkesztő mód";
             this.groupBox1.Visible = false;
+            // 
+            // TablaFeltoltPBox
+            // 
+            this.TablaFeltoltPBox.BackColor = System.Drawing.Color.Tan;
+            this.TablaFeltoltPBox.Image = ((System.Drawing.Image)(resources.GetObject("TablaFeltoltPBox.Image")));
+            this.TablaFeltoltPBox.Location = new System.Drawing.Point(114, 227);
+            this.TablaFeltoltPBox.Name = "TablaFeltoltPBox";
+            this.TablaFeltoltPBox.Size = new System.Drawing.Size(75, 75);
+            this.TablaFeltoltPBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.TablaFeltoltPBox.TabIndex = 9;
+            this.TablaFeltoltPBox.TabStop = false;
+            this.TablaFeltoltPBox.Click += new System.EventHandler(this.TablaFeltoltPBox_Click);
+            // 
+            // TablaTorolPBox
+            // 
+            this.TablaTorolPBox.BackColor = System.Drawing.Color.Brown;
+            this.TablaTorolPBox.Image = ((System.Drawing.Image)(resources.GetObject("TablaTorolPBox.Image")));
+            this.TablaTorolPBox.Location = new System.Drawing.Point(16, 227);
+            this.TablaTorolPBox.Name = "TablaTorolPBox";
+            this.TablaTorolPBox.Size = new System.Drawing.Size(75, 75);
+            this.TablaTorolPBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.TablaTorolPBox.TabIndex = 8;
+            this.TablaTorolPBox.TabStop = false;
+            this.TablaTorolPBox.Click += new System.EventHandler(this.TablaTorolPBox_Click);
             // 
             // KiralyPBox
             // 
@@ -157,33 +184,11 @@ namespace Sakk
             this.feherBtn.UseVisualStyleBackColor = false;
             this.feherBtn.Click += new System.EventHandler(this.feherBtn_Click);
             // 
-            // TablaTorolBtn
-            // 
-            this.TablaTorolBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.TablaTorolBtn.Location = new System.Drawing.Point(6, 231);
-            this.TablaTorolBtn.Name = "TablaTorolBtn";
-            this.TablaTorolBtn.Size = new System.Drawing.Size(77, 46);
-            this.TablaTorolBtn.TabIndex = 8;
-            this.TablaTorolBtn.Text = "Tábla törlés";
-            this.TablaTorolBtn.UseVisualStyleBackColor = true;
-            this.TablaTorolBtn.Click += new System.EventHandler(this.TablaTorolBtn_Click);
-            // 
-            // TablaFeltoltBtn
-            // 
-            this.TablaFeltoltBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.TablaFeltoltBtn.Location = new System.Drawing.Point(88, 231);
-            this.TablaFeltoltBtn.Name = "TablaFeltoltBtn";
-            this.TablaFeltoltBtn.Size = new System.Drawing.Size(106, 46);
-            this.TablaFeltoltBtn.TabIndex = 9;
-            this.TablaFeltoltBtn.Text = "Tábla feltöltése";
-            this.TablaFeltoltBtn.UseVisualStyleBackColor = true;
-            this.TablaFeltoltBtn.Click += new System.EventHandler(this.TablaFeltoltBtn_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(817, 881);
+            this.ClientSize = new System.Drawing.Size(817, 801);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
@@ -191,6 +196,8 @@ namespace Sakk
             this.Text = "Sakk";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.TablaFeltoltPBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TablaTorolPBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.KiralyPBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kiralynoPBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bastyaPBox)).EndInit();
@@ -212,8 +219,8 @@ namespace Sakk
         private System.Windows.Forms.PictureBox bastyaPBox;
         private System.Windows.Forms.PictureBox loPBox;
         private System.Windows.Forms.PictureBox futoPBox;
-        private System.Windows.Forms.Button TablaTorolBtn;
-        private System.Windows.Forms.Button TablaFeltoltBtn;
+        private System.Windows.Forms.PictureBox TablaFeltoltPBox;
+        private System.Windows.Forms.PictureBox TablaTorolPBox;
     }
 }
 

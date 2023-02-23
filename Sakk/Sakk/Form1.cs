@@ -156,15 +156,20 @@ namespace Sakk
         {
             if (klikkelt.Babu.Tipus=="paraszt")
             {
-                if (klikkelt.Babu.Szin=="fehér" && klikkelt.Koordinatak.Y==0)
+                if (klikkelt.Babu.Szin=="fehér" && klikkelt.Koordinatak.X==0)
                 {
-
+                    Promocio("fehér", klikkelt.Koordinatak.Y);
                 }
-                else if (klikkelt.Babu.Szin == "fehér" && klikkelt.Koordinatak.Y == tablameret-1)
+                else if (klikkelt.Babu.Szin == "fekete" && klikkelt.Koordinatak.X == tablameret-1)
                 {
-
+                    Promocio("fekete", klikkelt.Koordinatak.Y);
                 }
             }
+        }
+
+        private void Promocio(string melyikszin, int Xkoordinata)
+        {
+            
         }
 
         private void LepesPerUtes(Mezo klikkelt)
@@ -335,6 +340,15 @@ namespace Sakk
                 tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Babu = new Babu(aktszerkesztesbabu, aktszerkesztesszin == "w" ? "fehér" : "fekete");
                 tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Lepheto = false;
                 tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Kijelolt = false;
+
+                //bástyánál még nincs lekezelve
+                tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Babu.Lepettemar = true;
+                
+                
+                if ((aktszerkesztesbabu == "paraszt" && klikkelt.Koordinatak.X == 6 && aktszerkesztesszin == "w") || (aktszerkesztesbabu == "paraszt" && klikkelt.Koordinatak.X == 1 && aktszerkesztesszin == "b"))
+                {
+                    tabla[klikkelt.Koordinatak.X, klikkelt.Koordinatak.Y].Babu.Lepettemar = false;
+                }
             }
         }
 
@@ -439,8 +453,9 @@ namespace Sakk
             }
         }
 
-        private void TablaTorolBtn_Click(object sender, EventArgs e)
+        private void TablaTorolPBox_Click(object sender, EventArgs e)
         {
+            KijelolesekTorlese();
             for (int i = 0; i < tabla.GetLength(0); i++)
             {
                 for (int j = 0; j < tabla.GetLength(1); j++)
@@ -448,16 +463,15 @@ namespace Sakk
                     tabla[i, j].Babu = null;
                 }
             }
-            TablaTorolBtn.Enabled = false;
-            TablaTorolBtn.Enabled = true;
+            TablaFeltoltPBox.BorderStyle = BorderStyle.None;
+            TablaTorolPBox.BorderStyle = BorderStyle.Fixed3D;
         }
 
-        private void TablaFeltoltBtn_Click(object sender, EventArgs e)
+        private void TablaFeltoltPBox_Click(object sender, EventArgs e)
         {
-            TablaTorolBtn_Click(sender,e);
-            TablaFeltoltBtn.Enabled = false;
-            TablaFeltoltBtn.Enabled = true;
-            this.Focus();
+            TablaTorolPBox_Click(sender,e);
+            TablaTorolPBox.BorderStyle = BorderStyle.None;
+            TablaFeltoltPBox.BorderStyle = BorderStyle.Fixed3D;
             for (int i = 0; i < tabla.GetLength(0); i++)
             {
                 for (int j = 0; j < tabla.GetLength(1); j++)
@@ -466,5 +480,6 @@ namespace Sakk
                 }
             }
         }
+
     }
 }
