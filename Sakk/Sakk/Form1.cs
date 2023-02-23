@@ -24,12 +24,49 @@ namespace Sakk
         static string babu_tipus = "cburnett";
         static bool matt = false;
         static int masikszamlalo = 0;
+        static List<PictureBox> Tipusok = new List<PictureBox>();
 
         public Form1()
         {
             InitializeComponent();
             TablaGen();
             SzerkesztoMod();
+            TipusValaszto();
+        }
+
+        private void TipusValaszto()
+        {
+            List<string> tipusok = System.IO.Directory.GetDirectories(Environment.CurrentDirectory + "/piece").ToList();
+            for (int i = 0; i < tipusok.Count; i++)
+            {
+                int b = Convert.ToInt32($"{i}");
+                int gap = (TipusPanel.Size.Width- 23 - (50 * 3)) / 3;
+                PictureBox Pbox = new PictureBox
+                {
+                    SizeMode = PictureBoxSizeMode.Zoom,
+                    Size = new Size(50, 50),
+                    Location = new Point(gap + ((i%3))*(gap + 50), (i / 3) * (gap + 50)),
+                    BackColor = Color.Black
+                };
+                Pbox.Click += delegate (object sender, EventArgs e) { TipusValasztas(tipusok[b], Pbox); };
+                TipusPanel.Controls.Add(Pbox);
+            }
+        }
+
+        private void TipusValasztas(string tipus, PictureBox kep)
+        {
+            for (int i = 0; i < Tipusok.Count; i++)
+            {
+                Tipusok[i].BorderStyle = BorderStyle.None;
+            }
+            kep.BorderStyle = BorderStyle.Fixed3D;
+            for (int i = 0; i < tablameret; i++)
+            {
+                for (int j = 0; j < tablameret; j++)
+                {
+                    tabla[i, j].babu_tipus = tipus;
+                }
+            }
         }
 
         private void TablaGen()

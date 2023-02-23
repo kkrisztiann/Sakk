@@ -41,6 +41,7 @@ namespace Sakk
             this.parasztPBox = new System.Windows.Forms.PictureBox();
             this.feketeBtn = new System.Windows.Forms.Button();
             this.feherBtn = new System.Windows.Forms.Button();
+            this.TipusPanel = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TablaFeltoltPBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TablaTorolPBox)).BeginInit();
@@ -56,6 +57,7 @@ namespace Sakk
             // 
             this.groupBox1.Controls.Add(this.TablaFeltoltPBox);
             this.groupBox1.Controls.Add(this.TablaTorolPBox);
+            this.groupBox1.Controls.Add(this.TipusPanel);
             this.groupBox1.Controls.Add(this.KiralyPBox);
             this.groupBox1.Controls.Add(this.kiralynoPBox);
             this.groupBox1.Controls.Add(this.bastyaPBox);
@@ -64,9 +66,9 @@ namespace Sakk
             this.groupBox1.Controls.Add(this.parasztPBox);
             this.groupBox1.Controls.Add(this.feketeBtn);
             this.groupBox1.Controls.Add(this.feherBtn);
-            this.groupBox1.Location = new System.Drawing.Point(847, 39);
+            this.groupBox1.Location = new System.Drawing.Point(578, 69);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 309);
+            this.groupBox1.Size = new System.Drawing.Size(200, 783);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Szerkesztő mód";
@@ -184,6 +186,15 @@ namespace Sakk
             this.feherBtn.UseVisualStyleBackColor = false;
             this.feherBtn.Click += new System.EventHandler(this.feherBtn_Click);
             // 
+            // TipusPanel
+            // 
+            this.TipusPanel.AutoScroll = true;
+            this.TipusPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TipusPanel.Location = new System.Drawing.Point(6, 300);
+            this.TipusPanel.Name = "TipusPanel";
+            this.TipusPanel.Size = new System.Drawing.Size(188, 444);
+            this.TipusPanel.TabIndex = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -221,6 +232,7 @@ namespace Sakk
         private System.Windows.Forms.PictureBox futoPBox;
         private System.Windows.Forms.PictureBox TablaFeltoltPBox;
         private System.Windows.Forms.PictureBox TablaTorolPBox;
+        private System.Windows.Forms.Panel TipusPanel;
     }
 }
 
