@@ -203,11 +203,11 @@ namespace Sakk
             for (int i = -1; i <= 1; i++)
             {
                 List<Point> belso = new List<Point>();
+                belso.Add(new Point(Koordinatak.X + irany, Koordinatak.Y + i));
                 if (i == 0 && !Babu.Lepettemar)
                 {
                     belso.Add(new Point(Koordinatak.X + 2*irany, Koordinatak.Y + i));
                 }
-                belso.Add(new Point(Koordinatak.X + irany, Koordinatak.Y + i));
                 lista.Add(belso);
             }
             return lista;
