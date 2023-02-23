@@ -46,8 +46,9 @@ namespace Sakk
                     SizeMode = PictureBoxSizeMode.Zoom,
                     Size = new Size(50, 50),
                     Location = new Point(gap + ((i%3))*(gap + 50), (i / 3) * (gap + 50)),
-                    BackColor = Color.Black
-                };
+                    BackColor = Color.Black,
+                    Image = Image.FromFile($"piece\\{tipusok[b].Split('\\')[tipusok[b].Split('\\').Length - 1]}\\wN.png")
+            };
                 Pbox.Click += delegate (object sender, EventArgs e) { TipusValasztas(tipusok[b], Pbox); };
                 TipusPanel.Controls.Add(Pbox);
             }
@@ -55,6 +56,7 @@ namespace Sakk
 
         private void TipusValasztas(string tipus, PictureBox kep)
         {
+            tipus = tipus.Split('\\')[tipus.Split('\\').Length - 1];
             for (int i = 0; i < Tipusok.Count; i++)
             {
                 Tipusok[i].BorderStyle = BorderStyle.None;
@@ -64,7 +66,7 @@ namespace Sakk
             {
                 for (int j = 0; j < tablameret; j++)
                 {
-                    tabla[i, j].babu_tipus = tipus;
+                    tabla[i, j].babu_tipus = $"{tipus}";
                 }
             }
         }
