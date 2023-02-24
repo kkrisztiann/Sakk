@@ -58,3 +58,14 @@ D:\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.GenerateResource.cache
 D:\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.CoreCompileInputs.cache
 D:\Sakk\Sakk\Sakk\obj\Debug\Sakk.exe
 D:\Sakk\Sakk\Sakk\obj\Debug\Sakk.pdb
+D:\chessgama\Sakk\Sakk\bin\Debug\Sakk.exe.config
+D:\chessgama\Sakk\Sakk\bin\Debug\Sakk.exe
+D:\chessgama\Sakk\Sakk\bin\Debug\Sakk.pdb
+D:\chessgama\Sakk\Sakk\obj\Debug\Sakk.csprojAssemblyReference.cache
+D:\chessgama\Sakk\Sakk\obj\Debug\Sakk.Form1.resources
+D:\chessgama\Sakk\Sakk\obj\Debug\Sakk.PromociKivalasztas.resources
+D:\chessgama\Sakk\Sakk\obj\Debug\Sakk.Properties.Resources.resources
+D:\chessgama\Sakk\Sakk\obj\Debug\Sakk.csproj.GenerateResource.cache
+D:\chessgama\Sakk\Sakk\obj\Debug\Sakk.csproj.CoreCompileInputs.cache
+D:\chessgama\Sakk\Sakk\obj\Debug\Sakk.exe
+D:\chessgama\Sakk\Sakk\obj\Debug\Sakk.pdb

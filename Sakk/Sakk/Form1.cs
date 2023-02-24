@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Sakk
 {
@@ -57,6 +58,7 @@ namespace Sakk
         private void TipusValasztas(string tipus, PictureBox kep)
         {
             tipus = tipus.Split('\\')[tipus.Split('\\').Length - 1];
+            babu_tipus = tipus;
             for (int i = 0; i < Tipusok.Count; i++)
             {
                 Tipusok[i].BorderStyle = BorderStyle.None;
@@ -208,8 +210,14 @@ namespace Sakk
 
         private void Promocio(string melyikszin, int Xkoordinata)
         {
-            
+            PromociKivalasztas valasztas = new PromociKivalasztas(babu_tipus, kijon, melyikszin,Xkoordinata);
+            this.Controls.Add(valasztas);
+            valasztas.BringToFront();
+            MessageBox.Show(valasztas.kivalasztott);
+            tabla[0, Xkoordinata].Image = Image.FromFile($"piece/{babu_tipus}/w{valasztas.kivalasztott}.png");
+            valasztas.Hide();
         }
+
 
         private void LepesPerUtes(Mezo klikkelt)
         {
