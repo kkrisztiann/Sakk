@@ -33,6 +33,7 @@ namespace Sakk
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.TablaFeltoltPBox = new System.Windows.Forms.PictureBox();
             this.TablaTorolPBox = new System.Windows.Forms.PictureBox();
+            this.TipusPanel = new System.Windows.Forms.Panel();
             this.KiralyPBox = new System.Windows.Forms.PictureBox();
             this.kiralynoPBox = new System.Windows.Forms.PictureBox();
             this.bastyaPBox = new System.Windows.Forms.PictureBox();
@@ -41,7 +42,6 @@ namespace Sakk
             this.parasztPBox = new System.Windows.Forms.PictureBox();
             this.feketeBtn = new System.Windows.Forms.Button();
             this.feherBtn = new System.Windows.Forms.Button();
-            this.TipusPanel = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TablaFeltoltPBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TablaTorolPBox)).BeginInit();
@@ -66,9 +66,9 @@ namespace Sakk
             this.groupBox1.Controls.Add(this.parasztPBox);
             this.groupBox1.Controls.Add(this.feketeBtn);
             this.groupBox1.Controls.Add(this.feherBtn);
-            this.groupBox1.Location = new System.Drawing.Point(578, 69);
+            this.groupBox1.Location = new System.Drawing.Point(791, 43);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 783);
+            this.groupBox1.Size = new System.Drawing.Size(200, 746);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Szerkesztő mód";
@@ -97,6 +97,15 @@ namespace Sakk
             this.TablaTorolPBox.TabIndex = 8;
             this.TablaTorolPBox.TabStop = false;
             this.TablaTorolPBox.Click += new System.EventHandler(this.TablaTorolPBox_Click);
+            // 
+            // TipusPanel
+            // 
+            this.TipusPanel.AutoScroll = true;
+            this.TipusPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TipusPanel.Location = new System.Drawing.Point(6, 322);
+            this.TipusPanel.Name = "TipusPanel";
+            this.TipusPanel.Size = new System.Drawing.Size(188, 408);
+            this.TipusPanel.TabIndex = 10;
             // 
             // KiralyPBox
             // 
@@ -185,15 +194,6 @@ namespace Sakk
             this.feherBtn.TabIndex = 0;
             this.feherBtn.UseVisualStyleBackColor = false;
             this.feherBtn.Click += new System.EventHandler(this.feherBtn_Click);
-            // 
-            // TipusPanel
-            // 
-            this.TipusPanel.AutoScroll = true;
-            this.TipusPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TipusPanel.Location = new System.Drawing.Point(6, 300);
-            this.TipusPanel.Name = "TipusPanel";
-            this.TipusPanel.Size = new System.Drawing.Size(188, 444);
-            this.TipusPanel.TabIndex = 10;
             // 
             // Form1
             // 
