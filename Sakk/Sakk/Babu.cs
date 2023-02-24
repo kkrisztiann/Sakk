@@ -13,7 +13,6 @@ namespace Sakk
         public string Tipus;
         public string Szin;
         public bool Lepettemar = false;
-        public bool Sakkban = false;
 
         public Babu(string tipus, string szin)
         {

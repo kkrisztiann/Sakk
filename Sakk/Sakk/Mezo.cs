@@ -12,6 +12,7 @@ namespace Sakk
     {
         private int tablameret = 8;
         public Point Koordinatak;
+        public bool Sakkban = false;
         public string babu_tipus
         {
             get { return seged_tipus; }

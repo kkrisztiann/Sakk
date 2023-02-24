@@ -25,6 +25,7 @@ namespace Sakk
         static bool matt = false;
         static int masikszamlalo = 0;
         static List<PictureBox> Tipusok = new List<PictureBox>();
+        static Point SakkbanLevoKiralyPoz = new Point();
 
 
         public Form1()
@@ -190,11 +191,15 @@ namespace Sakk
             }
             if (masikszamlalo==0)
             {
-                if (true)
-                {
 
+                if (tabla[SakkbanLevoKiralyPoz.X, SakkbanLevoKiralyPoz.Y].Sakkban == true)
+                {
+                    MessageBox.Show("matt bébi");   
                 }
-                MessageBox.Show("matt bébi");
+                else
+                {
+                    MessageBox.Show("patt bébi");   
+                }
             }
             
         }
@@ -236,7 +241,7 @@ namespace Sakk
                 {
                     if (tabla[i,j].Babu!=null && tabla[i, j].Babu.Tipus=="király")
                     {
-                        tabla[i, j].Babu.Sakkban = false;
+                        tabla[i, j].Sakkban = false;
                     }
                 }
             }
@@ -253,7 +258,8 @@ namespace Sakk
                             {
                                 if (tabla[lista[k][l].X, lista[k][l].Y].Babu!=null && tabla[lista[k][l].X, lista[k][l].Y].Babu.Tipus == "király" && tabla[lista[k][l].X, lista[k][l].Y].Babu.Szin!=kijon)
                                 {
-                                    tabla[lista[k][l].X, lista[k][l].Y].Babu.Sakkban = true;
+                                    tabla[lista[k][l].X, lista[k][l].Y].Sakkban = true;
+                                    SakkbanLevoKiralyPoz = new Point(lista[k][l].X, lista[k][l].Y);
                                     return;
                                 }
                                 else if (tabla[lista[k][l].X, lista[k][l].Y].Babu!=null)
