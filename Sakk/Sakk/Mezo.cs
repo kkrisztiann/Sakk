@@ -12,7 +12,15 @@ namespace Sakk
     {
         private int tablameret = 8;
         public Point Koordinatak;
-        public bool Sakkban = false;
+        public bool Sakkban
+        {
+            get { return seged_sakkban; }
+            set
+            {
+                seged_sakkban = value;
+                BackgroundImage = Sakkban ? Image.FromFile("piece/sakk.png") : null;
+            }
+        }
         public string babu_tipus
         {
             get { return seged_tipus; }
@@ -36,7 +44,7 @@ namespace Sakk
             set
             {
                 seged_lepheto = value;
-                BackgroundImage = BgcImageChooseLepheto(Lepheto);
+                BackgroundImage = Sakkban ? Image.FromFile("piece/sakk.png") : BgcImageChooseLepheto(Lepheto);
             }
         }
         public bool Kijelolt
@@ -45,10 +53,11 @@ namespace Sakk
             set
             {
                 seged_kijelolt = value;
-                BackgroundImage = BgcImageChooseKijelolt(Kijelolt);
+                BackgroundImage = Sakkban ? Image.FromFile("piece/sakk.png") : BgcImageChooseKijelolt(Kijelolt);
             }
         }
 
+        private bool seged_sakkban;
         private bool seged_kijelolt;
         private bool seged_lepheto;
         private Babu seged_babu;
@@ -61,6 +70,7 @@ namespace Sakk
             Babu = null;
             Lepheto = false;
             Kijelolt = false;
+            Sakkban = false;
             Koordinatak = koordinatak;
             babu_tipus = "cburnett";
 
