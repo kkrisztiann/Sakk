@@ -130,10 +130,10 @@ namespace Sakk
                 {
                     //megtörténik a lépés/ütés
                     LepesPerUtes(klikkelt);
-                    SakkVane();
                     //kijelölések törlése
                     KijelolesekTorlese();
                     PromocioEllenorzes(klikkelt);
+                    SakkVane();
                     JatekosCsere();
                     MattEllenorzes();
 
@@ -566,6 +566,7 @@ namespace Sakk
 
         private void TablaFeltoltPBox_Click(object sender, EventArgs e)
         {
+            kijon = "fehér";
             TablaTorolPBox_Click(sender,e);
             TablaTorolPBox.BorderStyle = BorderStyle.None;
             TablaFeltoltPBox.BorderStyle = BorderStyle.Fixed3D;
