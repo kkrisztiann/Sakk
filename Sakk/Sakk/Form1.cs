@@ -26,6 +26,8 @@ namespace Sakk
         static bool matt = false;
         static int masikszamlalo = 0;
         static List<PictureBox> Tipusok = new List<PictureBox>();
+        static Point SakkbanLevoKiralyPoz = new Point();
+
 
         public Form1()
         {
@@ -46,10 +48,13 @@ namespace Sakk
                 {
                     SizeMode = PictureBoxSizeMode.Zoom,
                     Size = new Size(50, 50),
-                    Location = new Point(gap + ((i%3))*(gap + 50), (i / 3) * (gap + 50)),
-                    BackColor = Color.Black,
-                    Image = Image.FromFile($"piece\\{tipusok[b].Split('\\')[tipusok[b].Split('\\').Length - 1]}\\wN.png")
-            };
+                    Location = new Point(gap + ((i % 3)) * (gap + 50), (i / 3) * (gap + 50)),
+                    BackColor = i % 2 == 0 ? Color.Brown : Color.Tan,
+                    Image = Image.FromFile($"piece\\{tipusok[b].Split('\\')[tipusok[b].Split('\\').Length - 1]}\\wN.png"),
+                    
+                };
+                ToolTip tooltip1 = new ToolTip();
+                tooltip1.SetToolTip(Pbox, $"{tipusok[b].Split('\\')[tipusok[b].Split('\\').Length - 1]}");
                 Pbox.Click += delegate (object sender, EventArgs e) { TipusValasztas(tipusok[b], Pbox); };
                 TipusPanel.Controls.Add(Pbox);
             }
@@ -71,6 +76,7 @@ namespace Sakk
                     tabla[i, j].babu_tipus = $"{tipus}";
                 }
             }
+            SzerkesztoMod();
         }
 
         private void TablaGen()
@@ -128,6 +134,7 @@ namespace Sakk
                     //kijelölések törlése
                     KijelolesekTorlese();
                     PromocioEllenorzes(klikkelt);
+                    SakkVane();
                     JatekosCsere();
                     MattEllenorzes();
 
@@ -188,7 +195,15 @@ namespace Sakk
             }
             if (masikszamlalo==0)
             {
-                MessageBox.Show("matt bébi");
+
+                if (tabla[SakkbanLevoKiralyPoz.X, SakkbanLevoKiralyPoz.Y].Sakkban == true)
+                {
+                    MessageBox.Show("matt bébi");   
+                }
+                else
+                {
+                    MessageBox.Show("patt bébi");   
+                }
             }
             
         }
@@ -226,6 +241,46 @@ namespace Sakk
             klikkelt.Babu = kijelolt.Babu;
             // sáncnál ez nem fog működni
             kijelolt.Babu = null;
+        }
+
+        private void SakkVane()
+        {
+            for (int i = 0; i < tabla.GetLength(0); i++)
+            {
+                for (int j = 0; j < tabla.GetLength(1); j++)
+                {
+                    if (tabla[i,j].Babu!=null && tabla[i, j].Babu.Tipus=="király")
+                    {
+                        tabla[i, j].Sakkban = false;
+                    }
+                }
+            }
+            for (int i = 0; i < tabla.GetLength(0); i++)
+            {
+                for (int j = 0; j < tabla.GetLength(1); j++)
+                {
+                    if (tabla[i,j].Babu!=null && tabla[i,j].Babu.Szin==kijon)
+                    {
+                        List<List<Point>> lista = tabla[i, j].LepesLehetosegek();
+                        for (int k = 0; k < lista.Count; k++)
+                        {
+                            for (int l = 0; l < lista[k].Count; l++)
+                            {
+                                if (tabla[lista[k][l].X, lista[k][l].Y].Babu!=null && tabla[lista[k][l].X, lista[k][l].Y].Babu.Tipus == "király" && tabla[lista[k][l].X, lista[k][l].Y].Babu.Szin!=kijon)
+                                {
+                                    tabla[lista[k][l].X, lista[k][l].Y].Sakkban = true;
+                                    SakkbanLevoKiralyPoz = new Point(lista[k][l].X, lista[k][l].Y);
+                                    return;
+                                }
+                                else if (tabla[lista[k][l].X, lista[k][l].Y].Babu!=null)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void KijelolesekTorlese()
@@ -321,6 +376,8 @@ namespace Sakk
                 masikszamlalo--;
             }
         }
+
+
 
         private bool Sakkellenorzes(Mezo klikkelt, int i, int j)
         {
@@ -516,6 +573,7 @@ namespace Sakk
 
         private void TablaFeltoltPBox_Click(object sender, EventArgs e)
         {
+            kijon = "fehér";
             TablaTorolPBox_Click(sender,e);
             TablaTorolPBox.BorderStyle = BorderStyle.None;
             TablaFeltoltPBox.BorderStyle = BorderStyle.Fixed3D;
@@ -528,5 +586,12 @@ namespace Sakk
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+
+
+            this.ActiveControl = null; 
+        }
     }
 }
