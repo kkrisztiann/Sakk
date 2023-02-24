@@ -45,10 +45,13 @@ namespace Sakk
                 {
                     SizeMode = PictureBoxSizeMode.Zoom,
                     Size = new Size(50, 50),
-                    Location = new Point(gap + ((i%3))*(gap + 50), (i / 3) * (gap + 50)),
-                    BackColor = Color.Black,
-                    Image = Image.FromFile($"piece\\{tipusok[b].Split('\\')[tipusok[b].Split('\\').Length - 1]}\\wN.png")
-            };
+                    Location = new Point(gap + ((i % 3)) * (gap + 50), (i / 3) * (gap + 50)),
+                    BackColor = i % 2 == 0 ? Color.Brown : Color.Tan,
+                    Image = Image.FromFile($"piece\\{tipusok[b].Split('\\')[tipusok[b].Split('\\').Length - 1]}\\wN.png"),
+                    
+                };
+                ToolTip tooltip1 = new ToolTip();
+                tooltip1.SetToolTip(Pbox, $"{tipusok[b].Split('\\')[tipusok[b].Split('\\').Length - 1]}");
                 Pbox.Click += delegate (object sender, EventArgs e) { TipusValasztas(tipusok[b], Pbox); };
                 TipusPanel.Controls.Add(Pbox);
             }
