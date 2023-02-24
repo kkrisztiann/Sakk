@@ -26,6 +26,7 @@ namespace Sakk
         static int masikszamlalo = 0;
         static List<PictureBox> Tipusok = new List<PictureBox>();
 
+
         public Form1()
         {
             InitializeComponent();
@@ -57,6 +58,7 @@ namespace Sakk
         private void TipusValasztas(string tipus, PictureBox kep)
         {
             tipus = tipus.Split('\\')[tipus.Split('\\').Length - 1];
+            babu_tipus = tipus;
             for (int i = 0; i < Tipusok.Count; i++)
             {
                 Tipusok[i].BorderStyle = BorderStyle.None;
@@ -69,6 +71,7 @@ namespace Sakk
                     tabla[i, j].babu_tipus = $"{tipus}";
                 }
             }
+            SzerkesztoMod();
         }
 
         private void TablaGen()
@@ -123,6 +126,7 @@ namespace Sakk
                 {
                     //megtörténik a lépés/ütés
                     LepesPerUtes(klikkelt);
+                    SakkVane();
                     //kijelölések törlése
                     KijelolesekTorlese();
                     PromocioEllenorzes(klikkelt);
@@ -186,6 +190,10 @@ namespace Sakk
             }
             if (masikszamlalo==0)
             {
+                if (true)
+                {
+
+                }
                 MessageBox.Show("matt bébi");
             }
             
@@ -218,6 +226,45 @@ namespace Sakk
             klikkelt.Babu = kijelolt.Babu;
             // sáncnál ez nem fog működni
             kijelolt.Babu = null;
+        }
+
+        private void SakkVane()
+        {
+            for (int i = 0; i < tabla.GetLength(0); i++)
+            {
+                for (int j = 0; j < tabla.GetLength(1); j++)
+                {
+                    if (tabla[i,j].Babu!=null && tabla[i, j].Babu.Tipus=="király")
+                    {
+                        tabla[i, j].Babu.Sakkban = false;
+                    }
+                }
+            }
+            for (int i = 0; i < tabla.GetLength(0); i++)
+            {
+                for (int j = 0; j < tabla.GetLength(1); j++)
+                {
+                    if (tabla[i,j].Babu!=null && tabla[i,j].Babu.Szin==kijon)
+                    {
+                        List<List<Point>> lista = tabla[i, j].LepesLehetosegek();
+                        for (int k = 0; k < lista.Count; k++)
+                        {
+                            for (int l = 0; l < lista[k].Count; l++)
+                            {
+                                if (tabla[lista[k][l].X, lista[k][l].Y].Babu!=null && tabla[lista[k][l].X, lista[k][l].Y].Babu.Tipus == "király" && tabla[lista[k][l].X, lista[k][l].Y].Babu.Szin!=kijon)
+                                {
+                                    tabla[lista[k][l].X, lista[k][l].Y].Babu.Sakkban = true;
+                                    return;
+                                }
+                                else if (tabla[lista[k][l].X, lista[k][l].Y].Babu!=null)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void KijelolesekTorlese()
@@ -313,6 +360,8 @@ namespace Sakk
                 masikszamlalo--;
             }
         }
+
+
 
         private bool Sakkellenorzes(Mezo klikkelt, int i, int j)
         {
