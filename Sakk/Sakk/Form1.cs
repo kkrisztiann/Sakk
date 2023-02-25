@@ -82,6 +82,7 @@ namespace Sakk
 
         private void TablaGen()
         {
+            panel1.Size = new Size(833, 840);
             bool vilagos = true;
             for (int sor = 0; sor < tablameret; sor++)
             {
@@ -89,7 +90,7 @@ namespace Sakk
                 {
                     tabla[sor, oszlop] = new Mezo(new Point(sor, oszlop));
                     tabla[sor, oszlop].Location = new Point(kezdoPont.X + oszlop * tabla[sor, oszlop].Size.Width, kezdoPont.Y + sor * tabla[sor, oszlop].Size.Height);
-                    this.Controls.Add(tabla[sor, oszlop]);
+                    panel1.Controls.Add(tabla[sor, oszlop]);
 
                     tabla[sor, oszlop].BackColor = vilagos ? Color.Tan : Color.Brown;
                     if (oszlop != tablameret-1)
@@ -112,7 +113,14 @@ namespace Sakk
         {
             if (mezo.Lepheto)
             {
-                mezo.BackgroundImage = Image.FromFile("piece/kijeloltmezo.png");
+                if (mezo.Babu == null)
+                {
+                    mezo.BackgroundImage = Image.FromFile("piece/kijeloltmezo.png");
+                }
+                else
+                {
+                    mezo.BackgroundImage = Image.FromFile("piece/kijeloltbabu.png");
+                }
             }
         }
 
@@ -219,7 +227,7 @@ namespace Sakk
 
                 if (tabla[SakkbanLevoKiralyPoz.X, SakkbanLevoKiralyPoz.Y].Sakkban == true)
                 {
-                    MessageBox.Show("matt bébi");   
+                    MessageBox.Show("matt bébi");
                 }
                 else
                 {
@@ -247,6 +255,7 @@ namespace Sakk
             this.Controls.Add(valasztas);
             valasztas.BringToFront();
             valasztas.Dontes += delegate (object sender, EventArgs e) { PromocioKivalasztas(klikkelt); };
+            panel1.Enabled = false;
         }
 
         private void PromocioKivalasztas(Mezo klikkelt)
@@ -271,6 +280,7 @@ namespace Sakk
             }
             this.Controls.Remove(valasztas);
             valasztas = null;
+            panel1.Enabled = true;
             JatekosCsere();
             SakkVane();
             JatekosCsere();
@@ -292,10 +302,7 @@ namespace Sakk
             {
                 for (int j = 0; j < tabla.GetLength(1); j++)
                 {
-                    if (tabla[i,j].Babu!=null && tabla[i, j].Babu.Tipus=="király")
-                    {
-                        tabla[i, j].Sakkban = false;
-                    }
+                    tabla[i, j].Sakkban = false;
                 }
             }
             for (int i = 0; i < tabla.GetLength(0); i++)

@@ -43,6 +43,7 @@ namespace Sakk
             this.feketeBtn = new System.Windows.Forms.Button();
             this.feherBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TablaFeltoltPBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TablaTorolPBox)).BeginInit();
@@ -52,6 +53,7 @@ namespace Sakk
             ((System.ComponentModel.ISupportInitialize)(this.loPBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.futoPBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.parasztPBox)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -67,7 +69,7 @@ namespace Sakk
             this.groupBox1.Controls.Add(this.parasztPBox);
             this.groupBox1.Controls.Add(this.feketeBtn);
             this.groupBox1.Controls.Add(this.feherBtn);
-            this.groupBox1.Location = new System.Drawing.Point(791, 43);
+            this.groupBox1.Location = new System.Drawing.Point(798, 33);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 746);
             this.groupBox1.TabIndex = 0;
@@ -198,7 +200,7 @@ namespace Sakk
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(453, 12);
+            this.button1.Location = new System.Drawing.Point(597, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -206,13 +208,21 @@ namespace Sakk
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(675, 840);
+            this.panel1.TabIndex = 2;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(817, 801);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -227,6 +237,7 @@ namespace Sakk
             ((System.ComponentModel.ISupportInitialize)(this.loPBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.futoPBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.parasztPBox)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -246,6 +257,7 @@ namespace Sakk
         private System.Windows.Forms.PictureBox TablaTorolPBox;
         private System.Windows.Forms.Panel TipusPanel;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
