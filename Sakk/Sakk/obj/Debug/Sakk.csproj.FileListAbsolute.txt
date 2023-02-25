@@ -69,3 +69,14 @@ D:\chessgama\Sakk\Sakk\obj\Debug\Sakk.csproj.GenerateResource.cache
 D:\chessgama\Sakk\Sakk\obj\Debug\Sakk.csproj.CoreCompileInputs.cache
 D:\chessgama\Sakk\Sakk\obj\Debug\Sakk.exe
 D:\chessgama\Sakk\Sakk\obj\Debug\Sakk.pdb
+D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\bin\Debug\Sakk.exe.config
+D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\bin\Debug\Sakk.exe
+D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\bin\Debug\Sakk.pdb
+D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.AssemblyReference.cache
+D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\obj\Debug\Sakk.Form1.resources
+D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\obj\Debug\Sakk.PromociKivalasztas.resources
+D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\obj\Debug\Sakk.Properties.Resources.resources
+D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.GenerateResource.cache
+D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.CoreCompileInputs.cache
+D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\obj\Debug\Sakk.exe
+D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\obj\Debug\Sakk.pdb

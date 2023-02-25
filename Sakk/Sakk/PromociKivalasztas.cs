@@ -12,82 +12,59 @@ namespace Sakk
 {
     public partial class PromociKivalasztas : UserControl
     {
-        public static string babukep { get; set; }
-        public static string szin { get; set; }
-        public string kivalasztott = "";
-        public PromociKivalasztas(string Bkep, string Szin, string melyikszin, int xkoordinata)
+        public string BabuTipus { get; set; }
+
+        static List<PictureBox> boxok;
+        static List<string> babuk;
+        public PromociKivalasztas(Mezo klikkelt, string babu_tipus)
         {
             InitializeComponent();
-            if (melyikszin=="fehér")
+            boxok = new List<PictureBox>() { Pbox_0, Pbox_1, Pbox_2, Pbox_3 };
+            babuk = new List<string>() { "Q", "N", "R", "B" };
+            if (klikkelt.Koordinatak.X == 0)
             {
-                this.Location = new Point(50+xkoordinata*90, 50);
+                KepFeltoltes(babu_tipus, klikkelt.Babu.Szin, klikkelt.BackColor);
             }
             else
             {
-                //fekete
-                kiralynoPbox.Location = new Point(0, 270);
-                bastyaPbox.Location = new Point(0, 180);
-                futoPbox.Location = new Point(0, 90);
-                loPbox.Location = new Point(0, 0);
-                this.Location = new Point(50 + xkoordinata * 90, 50+360);
+                KepFeltoltes(babu_tipus, klikkelt.Babu.Szin, klikkelt.BackColor);
             }
-            if (xkoordinata % 2 == 0)
+
+        }
+
+        public event EventHandler Dontes;
+
+        private void KepFeltoltes(string babu_tipus, string szin, Color hatterszin)
+        {
+            List<Color> szinek = new List<Color>() { Color.Tan, Color.Brown, Color.Tan, Color.Brown, Color.Tan };
+            for (int i = szin == "fehér" ? 0 : 3; szin == "fehér" ? i <= 3 : i >= 0; i+= szin == "fehér" ? 1 : -1)
             {
-                kiralynoPbox.BackColor = Color.Tan;
-                bastyaPbox.BackColor = Color.Brown;
-                futoPbox.BackColor = Color.Tan;
-                loPbox.BackColor = Color.Brown;
+                int b = Convert.ToInt32($"{i}");
+                boxok[b].SizeMode = PictureBoxSizeMode.Zoom;
+                string rovid = szin == "fehér" ? "w" : "b";
+                string babu = szin == "fehér" ? babuk[b] : babuk[3 - b];
+                boxok[b].Image = Image.FromFile($"piece\\{babu_tipus}\\{rovid}{babu}.png");
+                boxok[b].Click += delegate (object sender, EventArgs e) { Kivalaszt(babu, sender, e); };
+                (szin == "fehér" ? boxok[b] : boxok[3 - b]).BackColor =  hatterszin == Color.Tan ? szinek[b] : szinek[b + 1];
+                boxok[b].BackgroundImageLayout = ImageLayout.Zoom;
+                boxok[b].MouseEnter += delegate (object sender, EventArgs e) { MouseEnter(boxok[b]); };
+                boxok[b].MouseLeave += delegate (object sender, EventArgs e) { MouseLeave(boxok[b]); };
             }
-            
-
-            babukep = Bkep;
-            szin = Szin;
-            if (szin == "fehér")
-            {
-                szin = "w";
-            }
-            else
-            {
-                szin = "b";
-            }
-            
-            KépFeltoltés();
         }
 
-        private void KépFeltoltés()
+        private void MouseEnter(PictureBox kep)
         {
-            kiralynoPbox.Image = Image.FromFile($"piece/{babukep}/{szin}Q.png");
-            bastyaPbox.Image = Image.FromFile($"piece/{babukep}/{szin}R.png");
-            futoPbox.Image = Image.FromFile($"piece/{babukep}/{szin}B.png");
-            loPbox.Image = Image.FromFile($"piece/{babukep}/{szin}N.png");
-
-            kiralynoPbox.SizeMode = PictureBoxSizeMode.Zoom;
-            kiralynoPbox.Size = new Size(90, 90);
-            bastyaPbox.SizeMode = PictureBoxSizeMode.Zoom;
-            bastyaPbox.Size = new Size(90, 90);
-            futoPbox.SizeMode = PictureBoxSizeMode.Zoom;
-            futoPbox.Size = new Size(90, 90);
-            loPbox.SizeMode = PictureBoxSizeMode.Zoom;
-            loPbox.Size = new Size(90, 90);
+            kep.BackgroundImage = Image.FromFile("piece/kijeloltbabu.png");
         }
-        private void kiralynoPbox_Click_1(object sender, EventArgs e)
+        private void MouseLeave(PictureBox kep)
         {
-            kivalasztott = "Q";
+            kep.BackgroundImage = null;
         }
 
-        private void bastyaPbox_Click(object sender, EventArgs e)
+        private void Kivalaszt(string babu, object sender, EventArgs e)
         {
-            kivalasztott = "R";
-        }
-
-        private void futoPbox_Click(object sender, EventArgs e)
-        {
-            kivalasztott = "B";
-        }
-
-        private void loPbox_Click(object sender, EventArgs e)
-        {
-            kivalasztott = "N";
+            BabuTipus = babu;
+            Dontes(sender, e);
         }
     }
 }

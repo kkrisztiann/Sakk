@@ -27,6 +27,7 @@ namespace Sakk
         static int masikszamlalo = 0;
         static List<PictureBox> Tipusok = new List<PictureBox>();
         static Point SakkbanLevoKiralyPoz = new Point();
+        static PromociKivalasztas valasztas = null;
 
 
         public Form1()
@@ -98,9 +99,29 @@ namespace Sakk
 
                     BabuGen(sor, oszlop);
                     tabla[sor, oszlop].MouseClick += new MouseEventHandler(Klikkeles);
+                    int a = Convert.ToInt32($"{sor}");
+                    int b = Convert.ToInt32($"{oszlop}");
+                    tabla[sor, oszlop].MouseEnter += delegate (object sender, EventArgs e) { MouseEnter(tabla[a, b]); };
+                    tabla[sor, oszlop].MouseLeave += delegate (object sender, EventArgs e) { MouseLeave(tabla[a, b]); };
                 }
             }
 
+        }
+
+        private void MouseLeave(Mezo mezo)
+        {
+            if (mezo.Lepheto)
+            {
+                mezo.BackgroundImage = Image.FromFile("piece/kijeloltmezo.png");
+            }
+        }
+
+        private void MouseEnter(Mezo mezo)
+        {
+            if (mezo.Lepheto)
+            {
+                mezo.BackgroundImage = Image.FromFile("piece/kijelolt.png");
+            }
         }
 
         private void BabuGen(int sor, int oszlop)
@@ -212,27 +233,49 @@ namespace Sakk
         {
             if (klikkelt.Babu.Tipus=="paraszt")
             {
-                if (klikkelt.Babu.Szin=="fehér" && klikkelt.Koordinatak.X==0)
+                if (klikkelt.Babu.Szin=="fehér" && klikkelt.Koordinatak.X==0 || klikkelt.Babu.Szin == "fekete" && klikkelt.Koordinatak.X == tablameret - 1)
                 {
-                    Promocio("fehér", klikkelt.Koordinatak.Y);
-                }
-                else if (klikkelt.Babu.Szin == "fekete" && klikkelt.Koordinatak.X == tablameret-1)
-                {
-                    Promocio("fekete", klikkelt.Koordinatak.Y);
+                    Promocio(klikkelt);
                 }
             }
         }
 
-        private void Promocio(string melyikszin, int Xkoordinata)
+        private void Promocio(Mezo klikkelt)
         {
-            PromociKivalasztas valasztas = new PromociKivalasztas(babu_tipus, kijon, melyikszin,Xkoordinata);
+            valasztas = new PromociKivalasztas(klikkelt, babu_tipus);
+            valasztas.Location = klikkelt.Babu.Szin == "fehér" ? klikkelt.Location : new Point(klikkelt.Location.X, klikkelt.Location.Y+ klikkelt.Size.Height - valasztas.Size.Height);
             this.Controls.Add(valasztas);
             valasztas.BringToFront();
-            MessageBox.Show(valasztas.kivalasztott);
-            tabla[0, Xkoordinata].Image = Image.FromFile($"piece/{babu_tipus}/w{valasztas.kivalasztott}.png");
-            valasztas.Hide();
+            valasztas.Dontes += delegate (object sender, EventArgs e) { PromocioKivalasztas(klikkelt); };
         }
 
+        private void PromocioKivalasztas(Mezo klikkelt)
+        {
+            string szin = klikkelt.Babu.Szin;
+            switch (valasztas.BabuTipus)
+            {
+                case "Q":
+                    klikkelt.Babu = new Babu("királynő", szin);
+                    break;
+                case "R":
+                    klikkelt.Babu = new Babu("bástya", szin);
+                    break;
+                case "N":
+                    klikkelt.Babu = new Babu("huszár", szin);
+                    break;
+                case "B":
+                    klikkelt.Babu = new Babu("futó", szin);
+                    break;
+                default:
+                    break;
+            }
+            this.Controls.Remove(valasztas);
+            valasztas = null;
+            JatekosCsere();
+            SakkVane();
+            JatekosCsere();
+            MattEllenorzes();
+        }
 
         private void LepesPerUtes(Mezo klikkelt)
         {
@@ -471,6 +514,7 @@ namespace Sakk
             SzerkesztoMod();
             feherBtn.Enabled = !feherBtn.Enabled;
             feherBtn.Enabled = !feherBtn.Enabled;
+            this.ActiveControl = null;
         }
 
         private void feherBtn_Click(object sender, EventArgs e)
@@ -481,6 +525,7 @@ namespace Sakk
             feketeBtn.Enabled = !feketeBtn.Enabled;
             feketeBtn.Enabled = !feketeBtn.Enabled;
             SzerkesztoMod();
+            this.ActiveControl = null;
         }
 
         private void SzerkesztoKijelolesLevetel()
@@ -588,9 +633,6 @@ namespace Sakk
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-
-
             this.ActiveControl = null; 
         }
     }
