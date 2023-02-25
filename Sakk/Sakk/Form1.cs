@@ -316,6 +316,10 @@ namespace Sakk
                         {
                             for (int l = 0; l < lista[k].Count; l++)
                             {
+                                if (tabla[i, j].Babu.Tipus == "paraszt" && k == 1)
+                                {
+                                    break;
+                                }
                                 if (tabla[lista[k][l].X, lista[k][l].Y].Babu!=null && tabla[lista[k][l].X, lista[k][l].Y].Babu.Tipus == "király" && tabla[lista[k][l].X, lista[k][l].Y].Babu.Szin!=kijon)
                                 {
                                     tabla[lista[k][l].X, lista[k][l].Y].Sakkban = true;
@@ -448,6 +452,10 @@ namespace Sakk
                             {
                                 if (segedtabla[lista[m][n].X, lista[m][n].Y].Babu != null)
                                 {
+                                    if (segedtabla[k,l].Babu.Tipus == "paraszt" && m == 1)
+                                    {
+                                        break;
+                                    }
                                     if (segedtabla[lista[m][n].X, lista[m][n].Y].Babu.Tipus == "király" && segedtabla[lista[m][n].X, lista[m][n].Y].Babu.Szin == kijon)
                                     {
                                         return false;
