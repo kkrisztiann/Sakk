@@ -22,7 +22,7 @@ namespace Sakk
         static string aktszerkesztesbabu = "";
         static bool szerekesztomod = false;
         static Mezo kijelolt = null;
-        static string babu_tipus = "cburnett";
+        static string babu_tipus = FileIO.Beolvas();
         static bool matt = false;
         static int masikszamlalo = 0;
         static List<PictureBox> Tipusok = new List<PictureBox>();
@@ -36,6 +36,8 @@ namespace Sakk
             TablaGen();
             SzerkesztoMod();
             TipusValaszto();
+            //this.ActiveControl = panel1;
+            this.ActiveControl = null;
         }
 
         private void TipusValaszto()
@@ -88,7 +90,7 @@ namespace Sakk
             {
                 for (int oszlop = 0; oszlop < tablameret; oszlop++)
                 {
-                    tabla[sor, oszlop] = new Mezo(new Point(sor, oszlop));
+                    tabla[sor, oszlop] = new Mezo(new Point(sor, oszlop), babu_tipus);
                     tabla[sor, oszlop].Location = new Point(kezdoPont.X + oszlop * tabla[sor, oszlop].Size.Width, kezdoPont.Y + sor * tabla[sor, oszlop].Size.Height);
                     panel1.Controls.Add(tabla[sor, oszlop]);
 
@@ -345,6 +347,8 @@ namespace Sakk
                 {
                     tabla[i, j].Kijelolt = false;
                     tabla[i, j].Lepheto = false;
+                    //tabla[i, j].Sakkban= false;
+
                 }
             }
             kijelolt = null;
@@ -481,7 +485,7 @@ namespace Sakk
             {
                 for (int j = 0; j < tablameret; j++)
                 {
-                    segedtabla[i, j] = new Mezo(new Point(i, j));
+                    segedtabla[i, j] = new Mezo(new Point(i, j),babu_tipus);
                     segedtabla[i, j].Babu = tabla[i, j].Babu;
                 }
             }
@@ -625,6 +629,7 @@ namespace Sakk
                 for (int j = 0; j < tabla.GetLength(1); j++)
                 {
                     tabla[i, j].Babu = null;
+                    tabla[i, j].Sakkban = false;
                 }
             }
             TablaFeltoltPBox.BorderStyle = BorderStyle.None;
@@ -646,9 +651,44 @@ namespace Sakk
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+        private void DontetlenBtn_Click(object sender, EventArgs e)
         {
-            this.ActiveControl = null; 
+            DialogResult dialogResult = MessageBox.Show("Elfogadja a döntetlent?", $"{kijon} döntetlent ajánl.", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                DialogResult dialogResult1 = MessageBox.Show("Szeretne új játékot kezdeni?", "Döntetlen!", MessageBoxButtons.YesNo);
+                if (dialogResult1 == DialogResult.Yes)
+                {
+                    Application.Restart();
+                }
+                else if (dialogResult1 == DialogResult.No)
+                {
+                    Application.Exit();
+                }
+            }
+            this.ActiveControl = null;
+
         }
+
+        private void FeladasBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Szeretne új játékot kezdeni?", $"{kijon} feladta a játékot, ön nyert!", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Application.Restart();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                Application.Exit();
+            }
+            this.ActiveControl = null;
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FileIO.Kiiras(babu_tipus);
+        }
+
     }
 }

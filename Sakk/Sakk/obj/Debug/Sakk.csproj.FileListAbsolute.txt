@@ -80,3 +80,4 @@ D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.GenerateResource.cache
 D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.CoreCompileInputs.cache
 D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\obj\Debug\Sakk.exe
 D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\obj\Debug\Sakk.pdb
+D:\Sakkocska\Sakk\Sakk\Sakk\obj\Debug\Sakk.PromociKivalasztas.resources

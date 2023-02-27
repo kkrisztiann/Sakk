@@ -42,8 +42,9 @@ namespace Sakk
             this.parasztPBox = new System.Windows.Forms.PictureBox();
             this.feketeBtn = new System.Windows.Forms.Button();
             this.feherBtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.FeladasBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.DontetlenBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TablaFeltoltPBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TablaTorolPBox)).BeginInit();
@@ -198,23 +199,38 @@ namespace Sakk
             this.feherBtn.UseVisualStyleBackColor = false;
             this.feherBtn.Click += new System.EventHandler(this.feherBtn_Click);
             // 
-            // button1
+            // FeladasBtn
             // 
-            this.button1.Location = new System.Drawing.Point(597, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Feladás";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.FeladasBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.FeladasBtn.Location = new System.Drawing.Point(267, 12);
+            this.FeladasBtn.Name = "FeladasBtn";
+            this.FeladasBtn.Size = new System.Drawing.Size(97, 33);
+            this.FeladasBtn.TabIndex = 1;
+            this.FeladasBtn.TabStop = false;
+            this.FeladasBtn.Text = "Feladás";
+            this.FeladasBtn.UseVisualStyleBackColor = true;
+            this.FeladasBtn.Click += new System.EventHandler(this.FeladasBtn_Click);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.DontetlenBtn);
+            this.panel1.Controls.Add(this.FeladasBtn);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(675, 840);
             this.panel1.TabIndex = 2;
+            // 
+            // DontetlenBtn
+            // 
+            this.DontetlenBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.DontetlenBtn.Location = new System.Drawing.Point(370, 12);
+            this.DontetlenBtn.Name = "DontetlenBtn";
+            this.DontetlenBtn.Size = new System.Drawing.Size(176, 33);
+            this.DontetlenBtn.TabIndex = 2;
+            this.DontetlenBtn.TabStop = false;
+            this.DontetlenBtn.Text = "Döntetlen felajánlása";
+            this.DontetlenBtn.UseVisualStyleBackColor = true;
+            this.DontetlenBtn.Click += new System.EventHandler(this.DontetlenBtn_Click);
             // 
             // Form1
             // 
@@ -227,6 +243,7 @@ namespace Sakk
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sakk";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TablaFeltoltPBox)).EndInit();
@@ -256,8 +273,9 @@ namespace Sakk
         private System.Windows.Forms.PictureBox TablaFeltoltPBox;
         private System.Windows.Forms.PictureBox TablaTorolPBox;
         private System.Windows.Forms.Panel TipusPanel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button FeladasBtn;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button DontetlenBtn;
     }
 }
 

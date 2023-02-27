@@ -65,14 +65,14 @@ namespace Sakk
 
 
         //KONSTRUKTOR----------------------------------------------------------------------------
-        public Mezo(Point koordinatak)
+        public Mezo(Point koordinatak, string Babutipus)
         {
             Babu = null;
             Lepheto = false;
             Kijelolt = false;
             Sakkban = false;
             Koordinatak = koordinatak;
-            babu_tipus = "cburnett";
+            babu_tipus = Babutipus;
 
             SizeMode = PictureBoxSizeMode.Zoom;
             BackgroundImageLayout = ImageLayout.Zoom;
