@@ -18,7 +18,10 @@ namespace Sakk
             set
             {
                 seged_sakkban = value;
-                BackgroundImage = Sakkban ? Image.FromFile("piece/sakk.png") : null;
+                if (!Seged_e)
+                {
+                    BackgroundImage = Sakkban ? Image.FromFile("piece/sakk.png") : null;
+                }
             }
         }
         public string babu_tipus
@@ -27,7 +30,10 @@ namespace Sakk
             set
             {
                 seged_tipus = value;
-                Image = KepValasztas(Babu);
+                if (!Seged_e)
+                {
+                    Image = KepValasztas(Babu);
+                }
             }
         }
         public Babu Babu {
@@ -35,7 +41,10 @@ namespace Sakk
             set
             {
                 seged_babu = value;
-                Image = KepValasztas(Babu);
+                if (!Seged_e)
+                {
+                    Image = KepValasztas(Babu);
+                }
             }
         }
         public bool Lepheto
@@ -44,7 +53,10 @@ namespace Sakk
             set
             {
                 seged_lepheto = value;
-                BackgroundImage = Sakkban ? Image.FromFile("piece/sakk.png") : BgcImageChooseLepheto(Lepheto);
+                if (!Seged_e)
+                {
+                    BackgroundImage = Sakkban ? Image.FromFile("piece/sakk.png") : BgcImageChooseLepheto(Lepheto);
+                }
             }
         }
         public bool Kijelolt
@@ -53,10 +65,14 @@ namespace Sakk
             set
             {
                 seged_kijelolt = value;
-                BackgroundImage = Sakkban ? Image.FromFile("piece/sakk.png") : BgcImageChooseKijelolt(Kijelolt);
+                if (!Seged_e)
+                {
+                    BackgroundImage = Sakkban ? Image.FromFile("piece/sakk.png") : BgcImageChooseKijelolt(Kijelolt);
+                }
             }
         }
 
+        public bool Seged_e;
         private bool seged_sakkban;
         private bool seged_kijelolt;
         private bool seged_lepheto;
@@ -65,7 +81,7 @@ namespace Sakk
 
 
         //KONSTRUKTOR----------------------------------------------------------------------------
-        public Mezo(Point koordinatak, string Babutipus)
+        public Mezo(Point koordinatak, string Babutipus, bool seged_e)
         {
             Babu = null;
             Lepheto = false;
@@ -73,6 +89,7 @@ namespace Sakk
             Sakkban = false;
             Koordinatak = koordinatak;
             babu_tipus = Babutipus;
+            Seged_e = seged_e;
 
             SizeMode = PictureBoxSizeMode.Zoom;
             BackgroundImageLayout = ImageLayout.Zoom;

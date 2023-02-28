@@ -54,8 +54,8 @@ namespace Sakk
                     Location = new Point(gap + ((i % 3)) * (gap + 50), (i / 3) * (gap + 50)),
                     BackColor = i % 2 == 0 ? Color.Brown : Color.Tan,
                     Image = Image.FromFile($"piece\\{tipusok[b].Split('\\')[tipusok[b].Split('\\').Length - 1]}\\wN.png"),
-                    
                 };
+                Tipusok.Add(Pbox);
                 ToolTip tooltip1 = new ToolTip();
                 tooltip1.SetToolTip(Pbox, $"{tipusok[b].Split('\\')[tipusok[b].Split('\\').Length - 1]}");
                 Pbox.Click += delegate (object sender, EventArgs e) { TipusValasztas(tipusok[b], Pbox); };
@@ -66,20 +66,23 @@ namespace Sakk
         private void TipusValasztas(string tipus, PictureBox kep)
         {
             tipus = tipus.Split('\\')[tipus.Split('\\').Length - 1];
-            babu_tipus = tipus;
-            for (int i = 0; i < Tipusok.Count; i++)
+            if (tipus != babu_tipus)
             {
-                Tipusok[i].BorderStyle = BorderStyle.None;
-            }
-            kep.BorderStyle = BorderStyle.Fixed3D;
-            for (int i = 0; i < tablameret; i++)
-            {
-                for (int j = 0; j < tablameret; j++)
+                babu_tipus = tipus;
+                for (int i = 0; i < Tipusok.Count; i++)
                 {
-                    tabla[i, j].babu_tipus = $"{tipus}";
+                    Tipusok[i].BorderStyle = BorderStyle.None;
                 }
+                kep.BorderStyle = BorderStyle.Fixed3D;
+                for (int i = 0; i < tablameret; i++)
+                {
+                    for (int j = 0; j < tablameret; j++)
+                    {
+                        tabla[i, j].babu_tipus = $"{tipus}";
+                    }
+                }
+                SzerkesztoMod();
             }
-            SzerkesztoMod();
         }
 
         private void TablaGen()
@@ -90,7 +93,7 @@ namespace Sakk
             {
                 for (int oszlop = 0; oszlop < tablameret; oszlop++)
                 {
-                    tabla[sor, oszlop] = new Mezo(new Point(sor, oszlop), babu_tipus);
+                    tabla[sor, oszlop] = new Mezo(new Point(sor, oszlop), babu_tipus, false);
                     tabla[sor, oszlop].Location = new Point(kezdoPont.X + oszlop * tabla[sor, oszlop].Size.Width, kezdoPont.Y + sor * tabla[sor, oszlop].Size.Height);
                     panel1.Controls.Add(tabla[sor, oszlop]);
 
@@ -229,11 +232,27 @@ namespace Sakk
 
                 if (tabla[SakkbanLevoKiralyPoz.X, SakkbanLevoKiralyPoz.Y].Sakkban == true)
                 {
-                    MessageBox.Show("matt bébi");
+                    DialogResult dialogResult1 = MessageBox.Show($"Sakk, Matt.\nA {kijon} nyerte a játszmát!\nSzeretne új játékot kezdeni?", "Győzelem!", MessageBoxButtons.YesNo);
+                    if (dialogResult1 == DialogResult.Yes)
+                    {
+                        Application.Restart();
+                    }
+                    else if (dialogResult1 == DialogResult.No)
+                    {
+                        Application.Exit();
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("patt bébi");   
+                    DialogResult dialogResult1 = MessageBox.Show($"Patt.\nA végeredmény döntetlen!\nSzeretne új játékot kezdeni?", "Döntetlen!", MessageBoxButtons.YesNo);
+                    if (dialogResult1 == DialogResult.Yes)
+                    {
+                        Application.Restart();
+                    }
+                    else if (dialogResult1 == DialogResult.No)
+                    {
+                        Application.Exit();
+                    }
                 }
             }
             
@@ -485,7 +504,7 @@ namespace Sakk
             {
                 for (int j = 0; j < tablameret; j++)
                 {
-                    segedtabla[i, j] = new Mezo(new Point(i, j),babu_tipus);
+                    segedtabla[i, j] = new Mezo(new Point(i, j),babu_tipus, true);
                     segedtabla[i, j].Babu = tabla[i, j].Babu;
                 }
             }
