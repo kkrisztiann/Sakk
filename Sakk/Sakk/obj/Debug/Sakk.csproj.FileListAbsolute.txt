@@ -81,3 +81,4 @@ D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\obj\Debug\Sakk.csproj.CoreCompileInputs.cache
 D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\obj\Debug\Sakk.exe
 D:\Tananyag\Aszalk\Sakk\Sakk\Sakk\obj\Debug\Sakk.pdb
 D:\Sakkocska\Sakk\Sakk\Sakk\obj\Debug\Sakk.PromociKivalasztas.resources
+D:\xampp\htdocs\2-14 SZFT 2022-2023\Sakk\Sakk\Sakk\obj\Debug\Sakk.PromociKivalasztas.resources

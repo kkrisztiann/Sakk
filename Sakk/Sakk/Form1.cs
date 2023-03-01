@@ -232,6 +232,7 @@ namespace Sakk
 
                 if (tabla[SakkbanLevoKiralyPoz.X, SakkbanLevoKiralyPoz.Y].Sakkban == true)
                 {
+                    JatekosCsere();
                     DialogResult dialogResult1 = MessageBox.Show($"Sakk, Matt.\nA {kijon} nyerte a játszmát!\nSzeretne új játékot kezdeni?", "Győzelem!", MessageBoxButtons.YesNo);
                     if (dialogResult1 == DialogResult.Yes)
                     {
@@ -386,6 +387,17 @@ namespace Sakk
                         //alitolag parasztot segiti
                         if (!(klikkelt.Babu.Tipus == "paraszt" && i % 2 == 0))
                         {
+                            //Sánc lenne
+                            /*
+                            if (klikkelt.Babu.Tipus == "király" && !klikkelt.Babu.Lepettemar && !tabla[0, klikkelt.Koordinatak.Y].Babu.Lepettemar)
+                            {
+                                lista[4].Add(new Point(klikkelt.Koordinatak.X-2, klikkelt.Koordinatak.Y));
+                            }
+                            if (klikkelt.Babu.Tipus == "király" && !klikkelt.Babu.Lepettemar && !tabla[tablameret-1, klikkelt.Koordinatak.Y].Babu.Lepettemar)
+                            {
+                                lista[5].Add(new Point(klikkelt.Koordinatak.X + 2, klikkelt.Koordinatak.Y));
+                            }
+                            */
                             if (Sakkellenorzes(klikkelt, lista[i][j].X, lista[i][j].Y) /*sakkellenörzés oda lépés esetén*/)
                             {
                                 if (!ellenorzes)
